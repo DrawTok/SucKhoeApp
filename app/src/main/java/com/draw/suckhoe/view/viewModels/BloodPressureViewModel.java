@@ -12,10 +12,11 @@ import com.draw.suckhoe.model.BloodPressure;
 import com.draw.suckhoe.model.LevelResult;
 import com.draw.suckhoe.repository.BPressureRepository;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RecordBPFRMViewModel extends ViewModel {
+public class BloodPressureViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> selectSYS = new MutableLiveData<>();
     private final MutableLiveData<Integer> selectDIA = new MutableLiveData<>();
@@ -23,6 +24,7 @@ public class RecordBPFRMViewModel extends ViewModel {
     private final MutableLiveData<Integer> selectPulse = new MutableLiveData<>();
     private final BPressureRepository repository;
     private final Application application;
+    private final MutableLiveData<List<BloodPressure>> bloodPressureListLiveData = new MutableLiveData<>();
 
     public void setSelectSYS(int valueSYS)
     {
@@ -96,10 +98,14 @@ public class RecordBPFRMViewModel extends ViewModel {
         return new LevelResult(nameRes, levelRes);
     }
 
-    public RecordBPFRMViewModel(Application application) {
+    public BloodPressureViewModel(Application application) {
         this.application= application;
         HealthDB healthDB = HealthDB.getInstance(application);
         repository = new BPressureRepository(healthDB);
+    }
+
+    public LiveData<List<BloodPressure>> getBloodPressureListLiveData() {
+        return bloodPressureListLiveData;
     }
 
     public void insertBPressure(BloodPressure bloodPressure) {
@@ -107,5 +113,13 @@ public class RecordBPFRMViewModel extends ViewModel {
         executorService.execute(() ->
                 repository.insertBPressure(bloodPressure));
         executorService.shutdown();
+    }
+
+    public void getListDataBPressure() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            List<BloodPressure> bloodPressureList = repository.getAllDataBPressure();
+            bloodPressureListLiveData.postValue(bloodPressureList);
+        });
     }
 }

@@ -19,7 +19,7 @@ import com.draw.suckhoe.factories.ViewModelFactory;
 import com.draw.suckhoe.model.BloodPressure;
 import com.draw.suckhoe.model.LevelResult;
 import com.draw.suckhoe.view.activity.DetailsActivity;
-import com.draw.suckhoe.view.viewModels.RecordBPFRMViewModel;
+import com.draw.suckhoe.view.viewModels.BloodPressureViewModel;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +32,7 @@ public class RecordBPFragment extends Fragment {
     private Vibrator vibrator;
     private RecordBpFragmentBinding binding;
     BloodPressure bloodPressure;
-    private RecordBPFRMViewModel viewModel;
+    private BloodPressureViewModel viewModel;
     HealthDB healthDB;
 
     @Nullable
@@ -48,7 +48,7 @@ public class RecordBPFragment extends Fragment {
         //generate database
         healthDB = HealthDB.getInstance(requireContext());
         ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
-        viewModel = new ViewModelProvider(this, factory).get(RecordBPFRMViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(BloodPressureViewModel.class);
 
         setScrollListener(binding.wheelSystolic);
         setScrollListener(binding.wheelDiastolic);
