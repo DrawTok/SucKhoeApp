@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homePage"
+        android:icon="@drawable/selected_home"
+        android:title="Trang chủ"/>
+
+    <item android:id="@+id/monitor"
+        android:icon="@drawable/selected_care"
+        android:title="Theo dõi"/>
+
+    <item android:id="@+id/details"
+        android:icon="@drawable/selected_info"
+        android:title="Thông tin chi tiết"/>
+
+    <item android:id="@+id/setting"
+        android:icon="@drawable/selected_setting"
+        android:title="Cài đặt"/>
+
+</menu>

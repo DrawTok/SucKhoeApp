@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp">
+        
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewInputBP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/white"
+            app:strokeColor="@android:color/transparent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/wheelSystolic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:np_max="300"
+                    app:np_min="20"
+                    app:np_value="3"
+                    app:np_selectedTextColor="@color/white"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_textColor="@color/white"
+                    app:np_width="@dimen/_50sdp"
+                    app:np_height="@dimen/_150sdp"
+                    app:np_dividerColor="@color/white"
+                    app:np_dividerLength="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/custom_wheel"
+                    android:backgroundTint="@color/green"
+                    android:contentDescription="Tâm thu"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/wheelDiastolic"/>
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/wheelDiastolic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:np_max="300"
+                    app:np_min="20"
+                    app:np_value="3"
+                    app:np_selectedTextColor="@color/white"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_textColor="@color/white"
+                    app:np_width="@dimen/_50sdp"
+                    app:np_height="@dimen/_150sdp"
+                    app:np_dividerColor="@color/white"
+                    app:np_dividerLength="@dimen/_40sdp"
+                    android:background="@drawable/custom_wheel"
+                    android:backgroundTint="@color/green"
+                    android:contentDescription="Tâm trương"
+                    app:layout_constraintTop_toTopOf="@id/wheelSystolic"
+                    app:layout_constraintStart_toEndOf="@id/wheelSystolic"
+                    app:layout_constraintEnd_toStartOf="@id/wheelPulse"/>
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/wheelPulse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:np_max="300"
+                    app:np_min="20"
+                    app:np_value="3"
+                    app:np_selectedTextColor="@color/white"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_textColor="@color/white"
+                    app:np_width="@dimen/_50sdp"
+                    app:np_height="@dimen/_150sdp"
+                    app:np_dividerColor="@color/white"
+                    app:np_dividerLength="@dimen/_40sdp"
+                    android:background="@drawable/custom_wheel"
+                    android:backgroundTint="@color/green"
+                    app:layout_constraintTop_toTopOf="@id/wheelDiastolic"
+                    android:contentDescription="Xung"
+                    app:layout_constraintStart_toEndOf="@id/wheelDiastolic"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvNameLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bPressure_normal"
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/wheelDiastolic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:drawableEndCompat="@drawable/information"
+                    android:drawablePadding="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/tvLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="normal"
+                    android:text="@string/bPressure_level_normal"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameLevel"
+                    app:layout_constraintStart_toStartOf="@id/tvNameLevel"
+                    app:layout_constraintEnd_toEndOf="@id/tvNameLevel" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLevel"
+                    android:layout_marginTop="@dimen/_10sdp">
+                    <View
+                        android:id="@+id/viewColorLow"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/blue_4th"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        app:layout_constraintEnd_toStartOf="@id/viewColorNormal"/>
+
+                    <View
+                        android:id="@+id/viewColorNormal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/green"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:layout_constraintStart_toEndOf="@id/viewColorLow"
+                        app:layout_constraintEnd_toStartOf="@id/viewColorHigh"/>
+
+                    <View
+                        android:id="@+id/viewColorHigh"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/yellow_primary"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:layout_constraintStart_toEndOf="@id/viewColorNormal"
+                        app:layout_constraintEnd_toStartOf="@id/viewColorStage1"/>
+
+                    <View
+                        android:id="@+id/viewColorStage1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/orange_primary"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:layout_constraintStart_toEndOf="@id/viewColorHigh"
+                        app:layout_constraintEnd_toStartOf="@id/viewColorStage2"/>
+
+                    <View
+                        android:id="@+id/viewColorStage2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/orange_secondary"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+
+                        app:layout_constraintStart_toEndOf="@id/viewColorStage1"
+                        app:layout_constraintEnd_toStartOf="@id/viewColorStage3"/>
+
+                    <View
+                        android:id="@+id/viewColorStage3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:backgroundTint="@color/red_primary"
+                        android:background="@drawable/bg_text_2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:layout_constraintStart_toEndOf="@id/viewColorStage2"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/cursor"
+                        app:layout_constraintTop_toBottomOf="@id/viewColorNormal"
+                        app:layout_constraintStart_toStartOf="@id/viewColorNormal"
+                        app:layout_constraintEnd_toEndOf="@id/viewColorNormal"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/tvConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xác nhận"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:backgroundTint="@color/green"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/custom_bottom_nav"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

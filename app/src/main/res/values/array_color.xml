@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="color_seekbar">
+        <item>@color/blue_4th</item>
+        <item>@color/green</item>
+        <item>@color/yellow_primary</item>
+        <item>@color/orange_primary</item>
+        <item>@color/orange_secondary</item>
+        <item>@color/red_primary</item>
+    </array>
+</resources>

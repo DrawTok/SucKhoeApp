@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Sức khỏe</string>
+    <string name="number_picker_formatter">%02d</string>
+
+    <string name="bPressure_normal">Bình thường</string>
+    <string name="bPressure_low">Huyết áp thấp</string>
+    <string name="bPressure_high">Huyết áp cao</string>
+    <string name="bPressure_stage">Tăng huyết áp</string>
+
+    <string name="bPressure_level_low">SYS &lt; 90 hoặc DIA &lt; 60</string>
+    <string name="bPressure_level_normal">SYS 90-119 và DIA 60-79</string>
+    <string name="bPressure_level_high">SYS 120-129 hoặc DIA 60-79</string>
+    <string name="bPressure_level_stage1">SYS 130-139 hoặc DIA 80-89</string>
+    <string name="bPressure_level_stage2">SYS 140-180 hoặc DIA 90-120</string>
+    <string name="bPressure_level_stage3">SYS > 180 và DIA > 120</string>
+</resources>
