@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/tvSysAndDias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="300\n20"
+            android:textSize="@dimen/_20ssp"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/tvUnit"
+            app:layout_constraintEnd_toEndOf="@id/tvUnit"
+            app:layout_constraintBottom_toTopOf="@id/tvUnit"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mmHg"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvSysAndDias"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            android:id="@+id/viewColor"
+            android:layout_width="@dimen/_6sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@color/red_primary"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvUnit"/>
+
+        <TextView
+            android:id="@+id/tvNameLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@id/viewColor"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Tăng huyết áp"/>
+
+        <TextView
+            android:id="@+id/tvPulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvNameLevel"
+            app:layout_constraintStart_toStartOf="@id/tvNameLevel"
+            android:text="Pulse: 88BPM"/>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="2023-09-29 04:48"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="@id/tvNameLevel"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_forward_ios_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
