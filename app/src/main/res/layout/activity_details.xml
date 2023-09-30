@@ -33,12 +33,14 @@
                 android:layout_height="@dimen/_20sdp"
                 android:src="@drawable/arrow_back"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:contentDescription="@string/back"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:onClick="@{()->DetailsViewModel.onClickBack()}"/>
 
             <TextView
+                android:id="@+id/tvActivityTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{DetailsViewModel.title}"
@@ -56,6 +58,7 @@
                 android:src="@drawable/clock_alarm"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/hen_gio"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/history"/>
 
@@ -64,6 +67,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:src="@drawable/history"
+                android:contentDescription="@string/gan_day"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +94,7 @@
             android:id="@+id/tvAddNewRecord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thêm bản ghi"
+            android:text="@string/them_ban_ghi"
             android:textColor="@color/white"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"

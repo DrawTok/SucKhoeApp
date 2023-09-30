@@ -65,19 +65,19 @@ public class RecordBPFragment extends Fragment {
             bundle.putParcelable("bPressure_info", bloodPressure);
             BPSuccessFragment successFragment = new BPSuccessFragment();
             successFragment.setArguments(bundle);
-            assert activity != null;
-            activity.replaceFragment(successFragment);
+            if(activity != null)
+                activity.replaceFragment(successFragment);
         });
 
 
         return binding.getRoot();
     }
 
-    private void displayLevelBPress() {
-        LevelResult result = viewModel.getBPLevel();
-        binding.tvNameLevel.setText(result.getNameRes());
-        binding.tvLevel.setText(result.getLevelRes());
+    private void displayLevelBPress(LevelResult levelResult) {
+        binding.tvNameLevel.setText(levelResult.getNameRes());
+        binding.tvLevel.setText(levelResult.getLevelRes());
     }
+
 
     private void handleVibrate()
     {
@@ -96,12 +96,17 @@ public class RecordBPFragment extends Fragment {
             int pulse = binding.wheelPulse.getValue();
             if(scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE)
             {
-                bloodPressure = new BloodPressure(0, sys, dia, pulse, getTimeNow());
-                handleVibrate();
+                viewModel.getLevelResultLiveData().observe(getViewLifecycleOwner(), levelResult -> {
+                    if (levelResult != null) {
+                        int type = levelResult.getType();
+                        bloodPressure = new BloodPressure(0, sys, dia, pulse, getTimeNow(), type);
+                        displayLevelBPress(levelResult);
+                    }
+                });
                 viewModel.setSelectSYS(sys);
                 viewModel.setSelectDIA(dia);
                 viewModel.setSelectPulse(pulse);
-                displayLevelBPress();
+                handleVibrate();
             }
         });
     }

@@ -16,12 +16,15 @@ public class BloodPressure implements Parcelable {
     int pulse; // xung
     String time;
 
-    public BloodPressure(int id, int systolic, int diastolic, int pulse, String time) {
+    int type;
+
+    public BloodPressure(int id, int systolic, int diastolic, int pulse, String time, int type) {
         this.id = id;
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.pulse = pulse;
         this.time = time;
+        this.type = type;
     }
 
     public int getId() {
@@ -64,6 +67,14 @@ public class BloodPressure implements Parcelable {
         this.time = time;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -76,6 +87,7 @@ public class BloodPressure implements Parcelable {
         dest.writeInt(diastolic);
         dest.writeInt(pulse);
         dest.writeString(time);
+        dest.writeInt(type);
     }
 
     public static final Parcelable.Creator<BloodPressure> CREATOR = new Parcelable.Creator<BloodPressure>() {
@@ -94,5 +106,6 @@ public class BloodPressure implements Parcelable {
         diastolic = in.readInt();
         pulse = in.readInt();
         time = in.readString();
+        type = in.readInt();
     }
 }

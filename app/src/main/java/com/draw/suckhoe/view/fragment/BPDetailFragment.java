@@ -11,9 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.draw.suckhoe.R;
 import com.draw.suckhoe.databinding.BpressureDetailFragmentBinding;
 import com.draw.suckhoe.factories.ViewModelFactory;
 import com.draw.suckhoe.model.BloodPressure;
+import com.draw.suckhoe.view.activity.DetailsActivity;
 import com.draw.suckhoe.view.adapter.HistoryBPAdapter;
 import com.draw.suckhoe.view.viewModels.BloodPressureViewModel;
 import com.github.mikephil.charting.components.XAxis;
@@ -36,20 +38,21 @@ public class BPDetailFragment extends Fragment {
     private BloodPressureViewModel viewModel;
     private HistoryBPAdapter historyBPAdapter;
 
+    private List<BloodPressure> list;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = BpressureDetailFragmentBinding.inflate(inflater, container, false);
         ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
         viewModel = new ViewModelProvider(this, factory).get(BloodPressureViewModel.class);
-
         setupUI();
         return binding.getRoot();
     }
 
     private void setupUI() {
-        setupArrowButtons();
         setupBarChart();
         observeBloodPressureData();
+        setupArrowButtons();
+        OnClickAllHistory();
         setDataAdapter();
     }
 
@@ -67,12 +70,39 @@ public class BPDetailFragment extends Fragment {
 
     private void checkPosText() {
         String[] texts = {"Trung bình", "Gần đây", "Min", "Max"};
-        if (countPosText < 0)
-            countPosText = texts.length - 1;
-        else if (countPosText > texts.length - 1)
-            countPosText = 0;
+        String sys, dias, pul;
+
+        switch (countPosText) {
+            case 3:
+                sys = String.valueOf(list.stream().mapToInt(BloodPressure::getSystolic).max().orElse(0));
+                dias = String.valueOf(list.stream().mapToInt(BloodPressure::getDiastolic).max().orElse(0));
+                pul = String.valueOf(list.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
+                break;
+            case 1:
+                int lastIndex = list.size() - 1;
+                sys = String.valueOf(list.get(lastIndex).getSystolic());
+                dias = String.valueOf(list.get(lastIndex).getDiastolic());
+                pul = String.valueOf(list.get(lastIndex).getPulse());
+                break;
+            case 2:
+                sys = String.valueOf(list.stream().mapToInt(BloodPressure::getSystolic).min().orElse(0));
+                dias = String.valueOf(list.stream().mapToInt(BloodPressure::getDiastolic).min().orElse(0));
+                pul = String.valueOf(list.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
+                break;
+            default:
+                countPosText = 0;
+                sys = String.valueOf(averageSystolic(list));
+                dias = String.valueOf(averageDiastolic(list));
+                pul = String.valueOf(averagePulse(list));
+                break;
+        }
+
+        binding.tvLvSystolic.setText(sys);
+        binding.tvLvDiastolic.setText(dias);
+        binding.tvLvPulse.setText(pul);
         binding.tvSelection.setText(texts[countPosText]);
     }
+
 
     private void setupBarChart() {
         BarDataSet barDataSet = new BarDataSet(new ArrayList<>(), "");
@@ -94,45 +124,47 @@ public class BPDetailFragment extends Fragment {
 
         viewModel.getBloodPressureListLiveData().observe(getViewLifecycleOwner(), bloodPressureList -> {
             if (bloodPressureList != null) {
-                ArrayList<BarEntry> barEntries = new ArrayList<>();
-                ArrayList<String> timeLabels = new ArrayList<>();
-                String previousTime = "";
-
+                list = bloodPressureList;
+                handleDataBarCHart(bloodPressureList);
                 historyBPAdapter.setList(bloodPressureList, 4);
-
-                for (int i = 0; i < bloodPressureList.size(); i++) {
-                    BloodPressure bloodPressure = bloodPressureList.get(i);
-                    float value = (float) bloodPressure.getSystolic();
-                    barEntries.add(new BarEntry(i, value));
-                    String currentTime = handleDateTime(bloodPressure);
-                    if (previousTime.equals(currentTime))
-                        timeLabels.add("");
-                    else {
-                        previousTime = currentTime;
-                        timeLabels.add(handleDateTime(bloodPressure));
-                    }
-                }
-
-                BarData barData = binding.barChartBPressure.getData();
-                if (barData != null) {
-                    barData.clearValues();
-                    barData.addDataSet(new BarDataSet(barEntries, ""));
-                    XAxis xAxis = binding.barChartBPressure.getXAxis();
-                    xAxis.setValueFormatter(new IndexAxisValueFormatter(timeLabels));
-                    xAxis.setLabelCount(timeLabels.size());
-                    xAxis.setAxisMinimum(0);
-                    xAxis.setAxisMaximum(timeLabels.size());
-                    binding.barChartBPressure.notifyDataSetChanged();
-                    binding.barChartBPressure.invalidate();
-                }
             }
         });
     }
 
+    private void handleDataBarCHart(List<BloodPressure> bloodPressureList)
+    {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        ArrayList<String> timeLabels = new ArrayList<>();
+        String previousTime = "";
+        for (int i = 0; i < bloodPressureList.size(); i++) {
+            BloodPressure bloodPressure = bloodPressureList.get(i);
+            float value = (float) bloodPressure.getSystolic();
+            barEntries.add(new BarEntry(i, value));
+            String currentTime = handleDateTime(bloodPressure);
+            if (previousTime.equals(currentTime))
+                timeLabels.add("");
+            else {
+                previousTime = currentTime;
+                timeLabels.add(handleDateTime(bloodPressure));
+            }
+        }
+
+        BarData barData = binding.barChartBPressure.getData();
+        if (barData != null) {
+            barData.clearValues();
+            barData.addDataSet(new BarDataSet(barEntries, ""));
+            XAxis xAxis = binding.barChartBPressure.getXAxis();
+            xAxis.setValueFormatter(new IndexAxisValueFormatter(timeLabels));
+            xAxis.setLabelCount(timeLabels.size());
+            xAxis.setAxisMinimum(0);
+            xAxis.setAxisMaximum(timeLabels.size());
+            binding.barChartBPressure.notifyDataSetChanged();
+            binding.barChartBPressure.invalidate();
+        }
+    }
     private String handleDateTime(BloodPressure bloodPressure) {
         SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         SimpleDateFormat outputDateFormat = new SimpleDateFormat("MM/dd", Locale.US);
-
         try {
             Date date = inputDateFormat.parse(bloodPressure.getTime());
             if (date != null)
@@ -153,13 +185,12 @@ public class BPDetailFragment extends Fragment {
     private int calculateAverage(List<BloodPressure> list, String field) {
         int sum = 0;
         for (BloodPressure bp : list) {
-            if ("systolic".equals(field)) {
+            if ("systolic".equals(field))
                 sum += bp.getSystolic();
-            } else if ("diastolic".equals(field)) {
+            else if ("diastolic".equals(field))
                 sum += bp.getDiastolic();
-            } else if ("pulse".equals(field)) {
+            else if ("pulse".equals(field))
                 sum += bp.getPulse();
-            }
         }
         return list.isEmpty() ? 0 : sum / list.size();
     }
@@ -174,5 +205,17 @@ public class BPDetailFragment extends Fragment {
 
     private int averagePulse(List<BloodPressure> list) {
         return calculateAverage(list, "pulse");
+    }
+
+    private void OnClickAllHistory()
+    {
+        binding.tvHistory.setOnClickListener(v -> {
+            DetailsActivity activity= (DetailsActivity) getActivity();
+            if(activity != null) {
+                activity.setTitleName("Lịch sử");
+                activity.findViewById(R.id.tvAddNewRecord).setVisibility(View.GONE);
+                activity.replaceFragment(new HistoryFragment());
+            }
+        });
     }
 }

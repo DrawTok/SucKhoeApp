@@ -20,86 +20,81 @@ public class BloodPressureViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> selectSYS = new MutableLiveData<>();
     private final MutableLiveData<Integer> selectDIA = new MutableLiveData<>();
-
     private final MutableLiveData<Integer> selectPulse = new MutableLiveData<>();
     private final BPressureRepository repository;
     private final Application application;
     private final MutableLiveData<List<BloodPressure>> bloodPressureListLiveData = new MutableLiveData<>();
+    private final MutableLiveData<LevelResult> levelResultLiveData = new MutableLiveData<>(); // Thêm LiveData cho LevelResult
 
-    public void setSelectSYS(int valueSYS)
-    {
+    public void setSelectSYS(int valueSYS) {
         selectSYS.setValue(valueSYS);
+        calculateBPLevel(); // Gọi hàm tính LevelResult sau khi giá trị selectSYS được thay đổi
     }
 
-    public LiveData<Integer> getSelectSYS()
-    {
+    public LiveData<Integer> getSelectSYS() {
         return selectSYS;
     }
 
-    public void setSelectDIA(int valueDIA)
-    {
+    public void setSelectDIA(int valueDIA) {
         selectDIA.setValue(valueDIA);
+        calculateBPLevel(); // Gọi hàm tính LevelResult sau khi giá trị selectDIA được thay đổi
     }
 
-    public LiveData<Integer> getSelectDIA()
-    {
+    public LiveData<Integer> getSelectDIA() {
         return selectDIA;
     }
 
-    public void setSelectPulse(int valuePulse)
-    {
+    public void setSelectPulse(int valuePulse) {
         selectPulse.setValue(valuePulse);
     }
 
-    public LiveData<Integer> getSelectPulse()
-    {
+    public LiveData<Integer> getSelectPulse() {
         return selectPulse;
     }
 
-    public LevelResult getBPLevel()
-    {
+    public LiveData<LevelResult> getLevelResultLiveData() {
+        return levelResultLiveData;
+    }
+
+    private void calculateBPLevel() {
         Integer valueSYS = selectSYS.getValue();
         Integer valueDIA = selectDIA.getValue();
         String nameRes = "";
         String levelRes = "";
-        if(valueSYS != null && valueDIA != null)
-        {
-            if(valueSYS < 90 || valueDIA < 60)
-            {
+        int type = -1;
+        if (valueSYS != null && valueDIA != null) {
+            if (valueSYS < 90 || valueDIA < 60) {
                 nameRes = application.getString(R.string.bPressure_low);
                 levelRes = application.getString(R.string.bPressure_level_low);
-            }
-            else if(valueSYS < 120 && valueDIA < 80)
-            {
+                type = 1;
+            } else if (valueSYS < 120 && valueDIA < 80) {
                 nameRes = application.getString(R.string.bPressure_normal);
                 levelRes = application.getString(R.string.bPressure_level_normal);
-            }
-            else if(valueSYS < 130  || valueDIA < 80)
-            {
+                type = 2;
+            } else if (valueSYS < 130 || valueDIA < 80) {
                 nameRes = application.getString(R.string.bPressure_high);
                 levelRes = application.getString(R.string.bPressure_level_high);
-            }
-            else if(valueSYS < 140 || valueDIA < 90)
-            {
+                type = 3;
+            } else if (valueSYS < 140 || valueDIA < 90) {
                 nameRes = application.getString(R.string.bPressure_stage);
                 levelRes = application.getString(R.string.bPressure_level_stage1);
-            }
-            else if(valueSYS <= 180 || valueDIA <= 120)
-            {
+                type = 4;
+            } else if (valueSYS <= 180 || valueDIA <= 120) {
                 nameRes = application.getString(R.string.bPressure_stage);
                 levelRes = application.getString(R.string.bPressure_level_stage2);
-            }
-            else
-            {
+                type = 5;
+            } else {
                 nameRes = application.getString(R.string.bPressure_stage);
                 levelRes = application.getString(R.string.bPressure_level_stage3);
+                type = 6;
             }
         }
-        return new LevelResult(nameRes, levelRes);
+        LevelResult result = new LevelResult(nameRes, levelRes, type);
+        levelResultLiveData.setValue(result); // Cập nhật LiveData cho LevelResult
     }
 
     public BloodPressureViewModel(Application application) {
-        this.application= application;
+        this.application = application;
         HealthDB healthDB = HealthDB.getInstance(application);
         repository = new BPressureRepository(healthDB);
     }

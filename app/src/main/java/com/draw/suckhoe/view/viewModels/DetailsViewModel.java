@@ -7,18 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 public class DetailsViewModel extends ViewModel {
 
-    private String title;
+    public final MutableLiveData<String> title = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isVisibility = new MutableLiveData<>(true);
     public final MutableLiveData<Boolean> navigateBack = new MutableLiveData<>();
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public LiveData<Boolean> getIsVisibility() {
         return isVisibility;
@@ -35,5 +27,14 @@ public class DetailsViewModel extends ViewModel {
     public void onClickBack()
     {
         navigateBack.setValue(true);
+    }
+
+    public LiveData<String> getLiveDataTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String titleName) {
+        title.setValue(titleName);
     }
 }

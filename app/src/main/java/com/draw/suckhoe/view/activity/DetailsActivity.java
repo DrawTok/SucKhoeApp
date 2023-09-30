@@ -21,6 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     ActivityDetailsBinding binding;
     DetailsViewModel viewModel;
+    private final String title = "Huyết áp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,10 @@ public class DetailsActivity extends AppCompatActivity {
         setStatusBarColor();
 
         replaceFragment(new BPDetailFragment());
-
         viewModel = new DetailsViewModel();
-        viewModel.setTitle("Huyết áp");
+        binding.setDetailsViewModel(viewModel);
+        setTitleName(title);
+
         viewModel.getNavigateBack().observe(this, isBack -> {
             if(isBack) {
                 handlePressBack();
@@ -43,16 +45,13 @@ public class DetailsActivity extends AppCompatActivity {
        viewModel.getIsVisibility().observe(this, isVisibility ->
                binding.tvAddNewRecord.setVisibility(isVisibility ? View.VISIBLE : View.GONE));
 
+       viewModel.getLiveDataTitle().observe(this, s -> binding.tvActivityTitle.setText(s));
 
         binding.tvAddNewRecord.setOnClickListener(v->
         {
             viewModel.setIsVisibility(false);
             replaceFragment(new RecordBPFragment());
         });
-
-        binding.setDetailsViewModel(viewModel);
-
-
     }
 
     private void setStatusBarColor() {
@@ -80,6 +79,7 @@ public class DetailsActivity extends AppCompatActivity {
         {
             fragmentManager.popBackStack();
             viewModel.setIsVisibility(true);
+            setTitleName(title);
         }else if(backStack > 2) {
             if(binding.timer.getVisibility() != View.VISIBLE)
                 binding.timer.setVisibility(View.VISIBLE);
@@ -90,4 +90,10 @@ public class DetailsActivity extends AppCompatActivity {
         else
             finish();
     }
+
+    public void setTitleName(String name)
+    {
+        viewModel.setTitle(name);
+    }
+
 }
