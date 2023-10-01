@@ -15,6 +15,7 @@ import com.draw.suckhoe.R;
 import com.draw.suckhoe.databinding.ActivityDetailsBinding;
 import com.draw.suckhoe.view.fragment.BPDetailFragment;
 import com.draw.suckhoe.view.fragment.RecordBPFragment;
+import com.draw.suckhoe.view.fragment.ReminderFragment;
 import com.draw.suckhoe.view.viewModels.DetailsViewModel;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -52,6 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
             viewModel.setIsVisibility(false);
             replaceFragment(new RecordBPFragment());
         });
+
+        binding.timer.setOnClickListener(v -> replaceFragment(new ReminderFragment()));
     }
 
     private void setStatusBarColor() {
