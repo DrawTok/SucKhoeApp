@@ -22,6 +22,9 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.text.ParseException;
@@ -38,12 +41,14 @@ public class BPDetailFragment extends Fragment {
     private BloodPressureViewModel viewModel;
     private HistoryBPAdapter historyBPAdapter;
 
-    private List<BloodPressure> list;
+    private List<BloodPressure> listDataBP;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = BpressureDetailFragmentBinding.inflate(inflater, container, false);
         ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
         viewModel = new ViewModelProvider(this, factory).get(BloodPressureViewModel.class);
+
+        listDataBP = new ArrayList<>();
         setupUI();
         return binding.getRoot();
     }
@@ -56,9 +61,71 @@ public class BPDetailFragment extends Fragment {
         setDataAdapter();
     }
 
+    private void setupPieChart() {
+        int countType1 = 0;
+        int countType2 = 0;
+        int countType3 = 0;
+        int countType4 = 0;
+        int countType5 = 0;
+        int countType6 = 0;
+
+        int[] colors = new int[]{
+                R.color.blue_4th,     // Type 1
+                R.color.green,      // Type 2
+                R.color.yellow_primary,    // Type 3
+                R.color.orange_primary,   // Type 4
+                R.color.orange_secondary,  // Type 5
+                R.color.red_primary      // Type 6
+        };
+        for (BloodPressure bp : listDataBP) {
+            int type = bp.getType();
+            if (type == 1)
+                countType1++;
+            else if (type == 2)
+                countType2++;
+            else if (type == 3)
+                countType3++;
+            else if (type == 4)
+                countType4++;
+            else if (type == 5)
+                countType5++;
+            else if (type == 6)
+                countType6++;
+        }
+
+        ArrayList<PieEntry> pieData = new ArrayList<>();
+        pieData.add(new PieEntry(countType1, getString(R.string.bPressure_low)));
+        pieData.add(new PieEntry(countType2, getString(R.string.bPressure_normal)));
+        pieData.add(new PieEntry(countType3, getString(R.string.bPressure_high)));
+        pieData.add(new PieEntry(countType4, getString(R.string.bPressure_stage)));
+        pieData.add(new PieEntry(countType5, getString(R.string.bPressure_stage)));
+        pieData.add(new PieEntry(countType6, getString(R.string.bPressure_stage)));
+
+        PieDataSet dataSet = new PieDataSet(pieData, "");
+
+        dataSet.setColors(colors, getContext());
+        dataSet.setValueTextSize(12f);
+        PieData data = new PieData(dataSet);
+        binding.pieChart.setData(data);
+        binding.pieChart.getDescription().setEnabled(false);
+        binding.pieChart.setCenterText(listDataBP.size() +"\nIn total");
+        binding.pieChart.setCenterTextSize(20f);
+        binding.pieChart.setDrawEntryLabels(false);
+        binding.pieChart.setHoleRadius(40f);
+        binding.pieChart.setTransparentCircleRadius(45f);
+        binding.pieChart.setTouchEnabled(false);
+        binding.pieChart.getLegend().setEnabled(false);
+
+
+        binding.pieChart.invalidate();
+    }
+
+
     private void setupArrowButtons() {
         binding.imvArrowLeft.setOnClickListener(v -> {
             countPosText--;
+            if(countPosText == -1)
+                countPosText = 3;
             checkPosText();
         });
 
@@ -74,26 +141,26 @@ public class BPDetailFragment extends Fragment {
 
         switch (countPosText) {
             case 3:
-                sys = String.valueOf(list.stream().mapToInt(BloodPressure::getSystolic).max().orElse(0));
-                dias = String.valueOf(list.stream().mapToInt(BloodPressure::getDiastolic).max().orElse(0));
-                pul = String.valueOf(list.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
+                sys = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getSystolic).max().orElse(0));
+                dias = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getDiastolic).max().orElse(0));
+                pul = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
                 break;
             case 1:
-                int lastIndex = list.size() - 1;
-                sys = String.valueOf(list.get(lastIndex).getSystolic());
-                dias = String.valueOf(list.get(lastIndex).getDiastolic());
-                pul = String.valueOf(list.get(lastIndex).getPulse());
+                int lastIndex = listDataBP.size() - 1;
+                sys = String.valueOf(listDataBP.get(lastIndex).getSystolic());
+                dias = String.valueOf(listDataBP.get(lastIndex).getDiastolic());
+                pul = String.valueOf(listDataBP.get(lastIndex).getPulse());
                 break;
             case 2:
-                sys = String.valueOf(list.stream().mapToInt(BloodPressure::getSystolic).min().orElse(0));
-                dias = String.valueOf(list.stream().mapToInt(BloodPressure::getDiastolic).min().orElse(0));
-                pul = String.valueOf(list.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
+                sys = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getSystolic).min().orElse(0));
+                dias = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getDiastolic).min().orElse(0));
+                pul = String.valueOf(listDataBP.stream().mapToInt(BloodPressure::getPulse).min().orElse(0));
                 break;
             default:
                 countPosText = 0;
-                sys = String.valueOf(averageSystolic(list));
-                dias = String.valueOf(averageDiastolic(list));
-                pul = String.valueOf(averagePulse(list));
+                sys = String.valueOf(averageSystolic());
+                dias = String.valueOf(averageDiastolic());
+                pul = String.valueOf(averagePulse());
                 break;
         }
 
@@ -108,6 +175,7 @@ public class BPDetailFragment extends Fragment {
         BarDataSet barDataSet = new BarDataSet(new ArrayList<>(), "");
         BarData barData = new BarData(barDataSet);
         binding.barChartBPressure.setData(barData);
+        binding.barChartBPressure.setScaleEnabled(false);
         binding.barChartBPressure.getAxisRight().setDrawLabels(false);
         binding.barChartBPressure.getDescription().setEnabled(false);
         binding.barChartBPressure.getLegend().setEnabled(false);
@@ -124,8 +192,10 @@ public class BPDetailFragment extends Fragment {
 
         viewModel.getBloodPressureListLiveData().observe(getViewLifecycleOwner(), bloodPressureList -> {
             if (bloodPressureList != null) {
-                list = bloodPressureList;
+                listDataBP = bloodPressureList;
                 handleDataBarCHart(bloodPressureList);
+                checkPosText();
+                setupPieChart();
                 historyBPAdapter.setList(bloodPressureList, 4);
             }
         });
@@ -133,9 +203,11 @@ public class BPDetailFragment extends Fragment {
 
     private void handleDataBarCHart(List<BloodPressure> bloodPressureList)
     {
+
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<String> timeLabels = new ArrayList<>();
         String previousTime = "";
+
         for (int i = 0; i < bloodPressureList.size(); i++) {
             BloodPressure bloodPressure = bloodPressureList.get(i);
             float value = (float) bloodPressure.getSystolic();
@@ -182,9 +254,9 @@ public class BPDetailFragment extends Fragment {
         binding.recycleHistoryBP.setAdapter(historyBPAdapter);
     }
 
-    private int calculateAverage(List<BloodPressure> list, String field) {
+    private int calculateAverage(String field) {
         int sum = 0;
-        for (BloodPressure bp : list) {
+        for (BloodPressure bp : listDataBP) {
             if ("systolic".equals(field))
                 sum += bp.getSystolic();
             else if ("diastolic".equals(field))
@@ -192,19 +264,19 @@ public class BPDetailFragment extends Fragment {
             else if ("pulse".equals(field))
                 sum += bp.getPulse();
         }
-        return list.isEmpty() ? 0 : sum / list.size();
+        return listDataBP.isEmpty() ? 0 : sum / listDataBP.size();
     }
 
-    private int averageSystolic(List<BloodPressure> list) {
-        return calculateAverage(list, "systolic");
+    private int averageSystolic() {
+        return calculateAverage("systolic");
     }
 
-    private int averageDiastolic(List<BloodPressure> list) {
-        return calculateAverage(list, "diastolic");
+    private int averageDiastolic() {
+        return calculateAverage("diastolic");
     }
 
-    private int averagePulse(List<BloodPressure> list) {
-        return calculateAverage(list, "pulse");
+    private int averagePulse() {
+        return calculateAverage("pulse");
     }
 
     private void OnClickAllHistory()
