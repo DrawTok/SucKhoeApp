@@ -3,6 +3,7 @@ package com.draw.suckhoe.view.activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -88,5 +89,7 @@ public class MainActivity extends AppCompatActivity {
         //xóa cờ nếu nó đã được đặt. Cờ này liên quan đến việc làm cho thanh trạng thái trong suốt
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+        //thay đổi màu icon hoặc text trên statusBar
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }
