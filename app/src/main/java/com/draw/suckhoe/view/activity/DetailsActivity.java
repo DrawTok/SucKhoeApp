@@ -54,7 +54,11 @@ public class DetailsActivity extends AppCompatActivity {
             replaceFragment(new RecordBPFragment());
         });
 
-        binding.timer.setOnClickListener(v -> replaceFragment(new ReminderFragment()));
+        binding.timer.setOnClickListener(v ->
+        {
+            binding.tvAddNewRecord.setVisibility(View.GONE);
+            replaceFragment(new ReminderFragment());
+        });
     }
 
     private void setStatusBarColor() {

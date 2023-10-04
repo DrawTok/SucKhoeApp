@@ -7,12 +7,18 @@
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">@dimen/_16ssp</item>
         <item name="android:textStyle">bold</item>
-    </style>
+        <item name="switchStyle">@style/Custom.Widget.SwitchCompat</item>
+        <item name="checkboxStyle">@style/Custom.Widget.CheckBox</item>
 
-    <style name="Theme.SứcKhỏe" parent="Base.Theme.SứcKhỏe" />
+    </style>
 
     <style name="whiteText">
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Custom.Widget.CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox"/>
+
+    <style name="Custom.Widget.SwitchCompat" parent="Widget.AppCompat.CompoundButton.Switch"/>
+
+    <style name="Theme.SứcKhỏe" parent="Base.Theme.SứcKhỏe" />
 </resources>

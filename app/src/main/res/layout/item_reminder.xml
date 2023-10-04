@@ -46,6 +46,7 @@
             android:padding="@dimen/_10sdp"
             app:track="@drawable/track_selector"
             android:thumb="@drawable/baseline_brightness_1_24"
+            android:checked="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

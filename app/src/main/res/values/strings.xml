@@ -17,4 +17,16 @@
     <string name="back">Trở lại</string>
     <string name="hen_gio">Hẹn giờ</string>
     <string name="gan_day">Gần đây</string>
+    <string name="gio">Giờ</string>
+    <string name="lap_lai">Lặp lại</string>
+    <string name="thu_3">TUS</string>
+    <string name="thu_2">MON</string>
+    <string name="thu_4">WED</string>
+    <string name="thu_5">THU</string>
+    <string name="thu_6">FRI</string>
+    <string name="thu_7">SAT</string>
+    <string name="chu_nhat">SUN</string>
+    <string name="them_moi">Thêm mới</string>
+    <string name="them_loi_nhac">Thêm lời nhắc</string>
+    <string name="xoa">Xóa</string>
 </resources>

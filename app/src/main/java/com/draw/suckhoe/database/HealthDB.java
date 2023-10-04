@@ -2,23 +2,28 @@ package com.draw.suckhoe.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.draw.suckhoe.model.BloodGlucose;
 import com.draw.suckhoe.model.BloodPressure;
+import com.draw.suckhoe.model.Reminder;
 import com.draw.suckhoe.model.Step;
 import com.draw.suckhoe.model.Water;
 import com.draw.suckhoe.model.Weight;
 import com.draw.suckhoe.myInterface.BloodGlucoseDAO;
 import com.draw.suckhoe.myInterface.BloodPressureDAO;
+import com.draw.suckhoe.myInterface.ReminderDAO;
 import com.draw.suckhoe.myInterface.StepDAO;
 import com.draw.suckhoe.myInterface.WaterDAO;
 import com.draw.suckhoe.myInterface.WeightDAO;
 
 @Database(entities = {Step.class, Water.class, Weight.class,
-                BloodGlucose.class, BloodPressure.class}, version = 1, exportSchema = false)
+                BloodGlucose.class, BloodPressure.class, Reminder.class}, version = 1, exportSchema = false)
 public abstract class HealthDB extends RoomDatabase {
 
     private static HealthDB healthDB;
@@ -38,6 +43,7 @@ public abstract class HealthDB extends RoomDatabase {
     public abstract BloodPressureDAO getBPressureDAO();
     public abstract BloodGlucoseDAO getBGlucoseDAO();
     public abstract WeightDAO getWeightDAO();
+    public abstract ReminderDAO getReminderDAO();
 }
 
 /*Phương thức getInstance(Context context):
