@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.draw.suckhoe.R;
 import com.draw.suckhoe.database.HealthDB;
 import com.draw.suckhoe.model.BloodPressure;
-import com.draw.suckhoe.model.LevelResult;
+import com.draw.suckhoe.utils.LevelResult;
 import com.draw.suckhoe.repository.BPressureRepository;
 
 import java.util.List;
@@ -108,6 +108,21 @@ public class BloodPressureViewModel extends ViewModel {
         executorService.execute(() ->
                 repository.insertBPressure(bloodPressure));
         executorService.shutdown();
+    }
+
+    public void deleteBPressure(BloodPressure bloodPressure) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() ->
+        {
+            try{
+                repository.deleteBPressure(bloodPressure);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }finally {
+                executorService.shutdown();
+            }
+        });
     }
 
     public void getListDataBPressure() {

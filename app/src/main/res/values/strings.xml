@@ -6,6 +6,9 @@
     <string name="bPressure_low">Huyết áp thấp</string>
     <string name="bPressure_high">Huyết áp cao</string>
     <string name="bPressure_stage">Tăng huyết áp</string>
+    <string name="bPressure_stage_1">Tăng huyết áp: Giai đoạn 1</string>
+    <string name="bPressure_stage_2">Tăng huyết áp: Giai đoạn 2</string>
+    <string name="bPressure_stage_3">Tăng huyết áp: Giai đoạn 3</string>
 
     <string name="bPressure_level_low">SYS &lt; 90 hoặc DIA &lt; 60</string>
     <string name="bPressure_level_normal">SYS 90–119 và DIA 60–79</string>
@@ -13,6 +16,18 @@
     <string name="bPressure_level_stage1">SYS 130–139 hoặc DIA 80–89</string>
     <string name="bPressure_level_stage2">SYS 140–180 hoặc DIA 90–120</string>
     <string name="bPressure_level_stage3">SYS > 180 và DIA > 120</string>
+
+
+    <string name="bGlucose_low"> Thấp </string>
+    <string name="bGlucose_normal">Bình thường</string>
+    <string name="bGlucose_preDiabetes">Tiền tiểu đường</string>
+    <string name="bGlucose_diabetes">Bệnh tiểu đường</string>
+
+    <string name="bGlucose_level_low"> &lt;4,0 </string>
+    <string name="bGlucose_level_normal">4,0~5,5</string>
+    <string name="bGlucose_level_preDiabetes">5,5~7,0</string>
+    <string name="bGlucose_level_diabetes"> >=7,0</string>
+
     <string name="them_ban_ghi">Thêm bản ghi</string>
     <string name="back">Trở lại</string>
     <string name="hen_gio">Hẹn giờ</string>
@@ -29,4 +44,12 @@
     <string name="them_moi">Thêm mới</string>
     <string name="them_loi_nhac">Thêm lời nhắc</string>
     <string name="xoa">Xóa</string>
+    <string name="unit_bg">mmol/L</string>
+    <string name="new_add_error">Thêm mới không thành công! Vui lòng đóng ứng dụng và thử lại...</string>
+    <string name="bpm">BPM</string>
+    <string name="mmhg">mmHg</string>
+    <string name="xong">Xong</string>
+    <string name="xoa_delete">Xóa</string>
+    <string name="unit_bp">mmHg</string>
+    <string name="bmi">BMI</string>
 </resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvNameDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cân nặng"
+        android:textSize="@dimen/_20ssp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.chingtech.rulerview.library.RulerView
+        android:id="@+id/ruler"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        app:rv_alphaEnable="false"
+        app:rv_indcatorWidth="3dp"
+        app:rv_itemSpacing="8dp"
+        app:rv_maxLineColor="@color/gray_secondary"
+        app:rv_maxLineHeight="@dimen/_30sdp"
+        app:rv_maxLineWidth="3dp"
+        app:rv_middleLineColor="@color/gray_secondary"
+        app:rv_middleLineHeight="@dimen/_20sdp"
+        app:rv_middleLineWidth="2dp"
+        app:rv_minLineColor="@color/gray_secondary"
+        app:rv_minLineHeight="@dimen/_10sdp"
+        app:rv_minLineWidth="1dp"
+        app:rv_resultTextColor="@color/black"
+        app:rv_resultTextSize="@dimen/_20ssp"
+        app:rv_scaleTextColor="@color/gray_secondary"
+        app:rv_scaleTextSize="@dimen/_12ssp"
+        app:rv_unitTextColor="@color/gray_secondary"
+        app:rv_unitTextSize="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNameDialog"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xác nhận"
+        android:textColor="@color/white"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        app:backgroundTint="@color/green"
+        android:textAlignment="center"
+        android:backgroundTint="@color/green"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/custom_bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/ruler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

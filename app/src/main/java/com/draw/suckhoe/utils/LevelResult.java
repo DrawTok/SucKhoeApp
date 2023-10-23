@@ -1,4 +1,4 @@
-package com.draw.suckhoe.model;
+package com.draw.suckhoe.utils;
 
 public class LevelResult {
     private final String nameRes;

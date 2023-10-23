@@ -14,33 +14,30 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.draw.suckhoe.R;
 import com.draw.suckhoe.database.HealthDB;
-import com.draw.suckhoe.databinding.BpSuccessFragmentBinding;
+import com.draw.suckhoe.databinding.BgSuccessFragmentBinding;
 import com.draw.suckhoe.factories.ViewModelFactory;
-import com.draw.suckhoe.model.BloodPressure;
+import com.draw.suckhoe.model.BloodGlucose;
 import com.draw.suckhoe.utils.LevelResult;
 import com.draw.suckhoe.utils.ViewColorRenderer;
 import com.draw.suckhoe.view.viewModels.BloodGlucoseViewModel;
-import com.draw.suckhoe.view.viewModels.BloodPressureViewModel;
 
-public class BPSuccessFragment extends Fragment {
+public class BGSuccessFragment extends Fragment {
 
-    BpSuccessFragmentBinding binding;
-    BloodPressure bloodPressure;
-
-    private BloodPressureViewModel viewModel;
-    HealthDB healthDB;
-
+    BgSuccessFragmentBinding binding;
     View clock, tvDlt;
-
+    private BloodGlucoseViewModel viewModel;
+    HealthDB healthDB;
+    private BloodGlucose bloodGlucose;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = BpSuccessFragmentBinding.inflate(inflater, container, false);
+
+        binding = BgSuccessFragmentBinding.inflate(inflater, container, false);
 
         healthDB = HealthDB.getInstance(requireContext());
 
         ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
-        viewModel = new ViewModelProvider(this, factory).get(BloodPressureViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(BloodGlucoseViewModel.class);
 
         if (getActivity() != null) {
             clock = getActivity().findViewById(R.id.timer);
@@ -58,7 +55,7 @@ public class BPSuccessFragment extends Fragment {
             fragmentManager.popBackStack();
             tvDlt.setVisibility(View.GONE);
             clock.setVisibility(View.VISIBLE);
-            viewModel.deleteBPressure(bloodPressure);
+            viewModel.deleteBGlucose(bloodGlucose);
         });
 
         return binding.getRoot();
@@ -67,30 +64,24 @@ public class BPSuccessFragment extends Fragment {
     private void getDataInBundle() {
         Bundle bundle = getArguments();
         if(bundle != null) {
-            bloodPressure = bundle.getParcelable("bPressure_info");
-            if(bloodPressure != null)
+            bloodGlucose = bundle.getParcelable("bGlucose_info");
+            if(bloodGlucose != null)
             {
-                binding.tvLvSystolic.setText(String.valueOf(bloodPressure.getSystolic()));
-                binding.tvLvDiastolic.setText(String.valueOf(bloodPressure.getDiastolic()));
-                binding.tvLvPulse.setText(String.valueOf(bloodPressure.getPulse()));
-                binding.tvTime.setText(bloodPressure.getTime());
-                renderColorView(bloodPressure);
+                binding.tvLevel.setText(String.valueOf(bloodGlucose.getLevelBGlucose()));
+                renderColorView(bloodGlucose);
             }
-
             if(bundle.getInt("IS_NEW_DATA") == 1)
                 requireActivity().findViewById(R.id.tvFinish).setVisibility(View.VISIBLE);
             else
                 tvDlt.setVisibility(View.VISIBLE);
         }
-
     }
 
-    private void renderColorView(BloodPressure bloodPressure)
+    private void renderColorView(BloodGlucose bloodGlucose)
     {
-        LevelResult result = new ViewColorRenderer().renderColorView(bloodPressure, requireContext());
-
-        binding.tvNameLevel.setText(result.getNameRes());
-        binding.tvAboutLevel.setText(result.getLevelRes());
-        binding.viewColor.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(),result.getType()));
+        LevelResult levelResult = new ViewColorRenderer().renderColorView(bloodGlucose, requireContext());
+        binding.tvNameLevel.setText(levelResult.getNameRes());
+        binding.tvLevelSmall.setText(levelResult.getLevelRes());
+        binding.viewColor.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), levelResult.getType()));
     }
 }

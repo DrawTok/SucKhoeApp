@@ -1,16 +1,13 @@
 package com.draw.suckhoe.view.fragment;
 
-import android.Manifest;
 import android.app.Dialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +17,6 @@ import android.view.Window;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,20 +25,21 @@ import com.draw.suckhoe.R;
 import com.draw.suckhoe.databinding.BottomLayoutBinding;
 import com.draw.suckhoe.databinding.DeleteAlarmDialogBinding;
 import com.draw.suckhoe.databinding.ReminderFragmentBinding;
-import com.draw.suckhoe.factories.ReminderViewModelFactory;
+import com.draw.suckhoe.factories.ViewModelFactory;
 import com.draw.suckhoe.helper.AlarmReceiver;
 import com.draw.suckhoe.model.Reminder;
 import com.draw.suckhoe.myInterface.OnClickItemListener;
-import com.draw.suckhoe.utils.PermissionConstants;
 import com.draw.suckhoe.view.adapter.ReminderAdapter;
 import com.draw.suckhoe.view.viewModels.ReminderViewModel;
 import com.shawnlin.numberpicker.NumberPicker;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class ReminderFragment extends Fragment implements OnClickItemListener {
 
@@ -52,8 +49,6 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
 
     private ReminderViewModel viewModel;
 
-    private Calendar calendar;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,9 +56,9 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
         vibrator = (Vibrator) requireActivity().getSystemService(Context.VIBRATOR_SERVICE);
         checkPermissions();
         // Khởi tạo ViewModel
-        ReminderViewModelFactory factory = new ReminderViewModelFactory(requireActivity().getApplication());
+        ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
         viewModel = new ViewModelProvider(this, factory).get(ReminderViewModel.class);
-        //createNotificationChannel();
+
         observeReminderData();
 
         //thực hiện thêm sự kiện cuộn numberPicker và hiển thị dialog
@@ -95,6 +90,20 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
             bottomBinding.tvDeleteReminder.setVisibility(View.GONE);
         bottomBinding.tvConfirmReminder.setText(textBtn);
 
+        Pair<Integer, Integer> timeInt;
+        if(textBtn.equals("Cập nhật") && reminder != null)
+        {
+            timeInt = convertTimeToInt(reminder.getTimeReminder());
+        }else
+        {
+            String time = getTimeNow();
+            timeInt = convertTimeToInt(time);
+        }
+
+        bottomBinding.wheelHour.setValue(timeInt.first);
+        bottomBinding.wheelMinutes.setValue(timeInt.second);
+
+
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(bottomBinding.getRoot());
         dialog.show();
@@ -120,6 +129,13 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
                 dialog.dismiss();
             }
         });
+    }
+
+    private String getTimeNow() {
+        Calendar currentTime = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        return format.format(currentTime.getTime());
+
     }
 
     //thiết lập rung trong view NumberPicker
@@ -181,7 +197,7 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
         binding.recyclerReminder.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerReminder.setHasFixedSize(true);
         ReminderAdapter adapter = new ReminderAdapter();
-        adapter.setList(list);
+        adapter.setList(viewModel,list);
         adapter.setOnClickItemListener(this);
         binding.recyclerReminder.setAdapter(adapter);
     }
@@ -214,46 +230,28 @@ public class ReminderFragment extends Fragment implements OnClickItemListener {
         alarmDialogBinding.tvCancel.setOnClickListener(v -> dialog.dismiss());
         alarmDialogBinding.tvAccept.setOnClickListener(v -> {
             viewModel.deleteReminder(reminder.getIdReminder());
+            AlarmReceiver alarmReceiver = new AlarmReceiver();
+            alarmReceiver.removeScheduler(reminder);
             dialog.dismiss();
         });
     }
 
     private void generateAlarmClock(Reminder reminder) {
-        Calendar calendar = Calendar.getInstance();
-        String time = reminder.getTimeReminder();
+        AlarmReceiver alarmReceiver = new AlarmReceiver();
+        alarmReceiver.addReminder(reminder);
+        alarmReceiver.scheduleReminders(requireContext());
+
+    }
+    private void checkPermissions()
+    {
+        // Kiểm tra và yêu cầu quyền thông báo
+    }
+
+    public Pair<Integer, Integer> convertTimeToInt(String time)
+    {
         String[] times = time.split(":");
         int hour = Integer.parseInt(times[0]);
         int minute = Integer.parseInt(times[1]);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-
-        AlarmReceiver alarmReceiver = new AlarmReceiver();
-        alarmReceiver.setAlarm(requireContext(), calendar.getTimeInMillis());
+        return new Pair<>(hour, minute);
     }
-    private void createNotificationChannel()
-    {
-        CharSequence name = "Theo dõi sức khỏe";
-        String description = "Lời nhắc nhở";
-        int important = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel notificationChannel = new NotificationChannel("SucKhoe", name, important);
-        notificationChannel.setDescription(description);
-
-        NotificationManager notificationManager = requireActivity().getSystemService(NotificationManager.class);
-        if (notificationManager != null) {
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-    }
-
-    private void checkPermissions()
-    {
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.VIBRATE}, PermissionConstants.MY_PERMISSION_REQUEST_VIBRATE);
-        }
-
-        // Kiểm tra và yêu cầu quyền thông báo
-
-
-    }
-
 }

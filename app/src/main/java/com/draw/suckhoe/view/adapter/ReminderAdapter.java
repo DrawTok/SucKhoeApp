@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.draw.suckhoe.databinding.ItemReminderBinding;
 import com.draw.suckhoe.model.Reminder;
 import com.draw.suckhoe.myInterface.OnClickItemListener;
+import com.draw.suckhoe.view.viewModels.ReminderViewModel;
 
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
 
     ItemReminderBinding binding;
     List<Reminder> list;
-
     OnClickItemListener onClickItemListener;
+    ReminderViewModel reminderViewModel;
 
-    public void setList(List<Reminder> list)
+
+    public void setList(ReminderViewModel reminderViewModel, List<Reminder> list)
     {
+        this.reminderViewModel = reminderViewModel;
         this.list = list;
     }
     public void setOnClickItemListener(OnClickItemListener onClickItemListener)
@@ -44,6 +47,13 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         holder.itemView.setOnClickListener(v->
         {if(onClickItemListener != null)
             onClickItemListener.onClickItemListener(position);});
+        holder.binding.switchReminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+                reminder.setIsSwitchOn(1);
+            else
+                reminder.setIsSwitchOn(0);
+            reminderViewModel.updateReminder(reminder);
+        });
     }
 
     @Override

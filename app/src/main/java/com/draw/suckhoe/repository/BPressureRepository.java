@@ -17,6 +17,10 @@ public class BPressureRepository {
         bloodPressureDAO.insertBPressure(bloodPressure);
     }
 
+    public void deleteBPressure(BloodPressure bloodPressure) {
+        bloodPressureDAO.deleteBPressure(bloodPressure);
+    }
+
     public List<BloodPressure> getAllDataBPressure() {
         return bloodPressureDAO.getAllRecordBPressure();
     }

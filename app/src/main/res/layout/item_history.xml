@@ -4,17 +4,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp">
+        android:padding="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/custom_dialog">
 
         <TextView
-            android:id="@+id/tvSysAndDias"
+            android:id="@+id/tvValueLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="300\n20"
             android:textSize="@dimen/_20ssp"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@id/tvUnit"
-            app:layout_constraintEnd_toEndOf="@id/tvUnit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/viewColor"
             app:layout_constraintBottom_toTopOf="@id/tvUnit"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,17 +24,19 @@
             android:id="@+id/tvUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mmHg"
+            android:text="@string/unit_bp"
             android:textSize="@dimen/_11ssp"
-            app:layout_constraintTop_toBottomOf="@id/tvSysAndDias"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvValueLevel"
+            app:layout_constraintStart_toStartOf="@id/tvValueLevel"
+            app:layout_constraintEnd_toEndOf="@id/tvValueLevel"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <View
             android:id="@+id/viewColor"
             android:layout_width="@dimen/_6sdp"
             android:layout_height="@dimen/_80sdp"
-            android:background="@color/red_primary"
+            android:background="@drawable/custom_dialog"
+            android:backgroundTint="@color/red_primary"
             android:layout_marginStart="@dimen/_20sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,24 +49,21 @@
             android:textSize="@dimen/_14ssp"
             android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintStart_toEndOf="@id/viewColor"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Tăng huyết áp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvPulse"
+            android:id="@+id/tvMoreInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintTop_toBottomOf="@id/tvNameLevel"
-            app:layout_constraintStart_toStartOf="@id/tvNameLevel"
-            android:text="Pulse: 88BPM"/>
+            app:layout_constraintStart_toStartOf="@id/tvNameLevel" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="2023-09-29 04:48"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="@id/tvNameLevel"/>
 
@@ -71,6 +72,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_arrow_forward_ios_24"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

@@ -38,10 +38,10 @@ android {
 dependencies {
 
     //nếu (jdk_version == 1,8)
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -65,6 +65,5 @@ dependencies {
     //wheelPicker
     implementation("io.github.ShawnLin013:number-picker:2.4.13")
 
-    //color seekBar
-    implementation("com.github.rtugeek:colorseekbar:2.0.3")
+    implementation("com.github.shichunlei:RulerView:1.0.0")
 }

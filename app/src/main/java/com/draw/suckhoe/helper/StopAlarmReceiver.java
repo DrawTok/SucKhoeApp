@@ -10,7 +10,7 @@ public class StopAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         int notificationID = intent.getIntExtra("NOTIFICATION_ID", -1);
-        Intent stopAlarmIntent = new Intent(context, AlarmSoundService.class);
+        Intent stopAlarmIntent = new Intent(context, ForegroundService.class);
         context.stopService(stopAlarmIntent);
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

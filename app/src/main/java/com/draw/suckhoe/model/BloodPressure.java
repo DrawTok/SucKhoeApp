@@ -39,32 +39,18 @@ public class BloodPressure implements Parcelable {
         return systolic;
     }
 
-    public void setSystolic(int systolic) {
-        this.systolic = systolic;
-    }
 
     public int getDiastolic() {
         return diastolic;
     }
 
-    public void setDiastolic(int diastolic) {
-        this.diastolic = diastolic;
-    }
 
     public int getPulse() {
         return pulse;
     }
 
-    public void setPulse(int pulse) {
-        this.pulse = pulse;
-    }
-
     public String getTime() {
         return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public int getType() {

@@ -90,6 +90,10 @@ public class Reminder implements Parcelable {
         return isSwitchOn;
     }
 
+    public void setIsSwitchOn(int isSwitchOn)
+    {
+        this.isSwitchOn = isSwitchOn;
+    }
     @Override
     public int describeContents() {
         return 0;

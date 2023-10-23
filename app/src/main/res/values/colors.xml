@@ -11,7 +11,9 @@
     <color name="blue_primary">#DEEEFE</color>
     <color name="blue_secondary">#EBF8FF</color>
     <color name="blue_third">#F0F4FF</color>
+    <color name="purple">#7C2FDF</color>
     <color name="blue_4th">#3580FF</color>
+    <color name="blue_5th">#2F36DF</color>
     <color name="yellow_primary">#FED269</color>
     <color name="orange_primary">#F48D42</color>
     <color name="orange_secondary">#F47741</color>
