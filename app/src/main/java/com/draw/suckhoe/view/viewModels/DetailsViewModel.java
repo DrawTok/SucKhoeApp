@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 public class DetailsViewModel extends ViewModel {
 
     public final MutableLiveData<String> title = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> isVisibility = new MutableLiveData<>(true);
+    private final MutableLiveData<Boolean> isVisibility = new MutableLiveData<>();
     public final MutableLiveData<Boolean> navigateBack = new MutableLiveData<>();
 
 

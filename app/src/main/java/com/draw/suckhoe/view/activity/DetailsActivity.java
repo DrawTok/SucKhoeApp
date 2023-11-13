@@ -2,6 +2,7 @@ package com.draw.suckhoe.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,6 +24,7 @@ import com.draw.suckhoe.view.fragment.RecordBGFragment;
 import com.draw.suckhoe.view.fragment.RecordBMIFragment;
 import com.draw.suckhoe.view.fragment.RecordBPFragment;
 import com.draw.suckhoe.view.fragment.ReminderFragment;
+import com.draw.suckhoe.view.fragment.WaterFragment;
 import com.draw.suckhoe.view.viewModels.DetailsViewModel;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -50,9 +52,13 @@ public class DetailsActivity extends AppCompatActivity {
         {
             title = "Đường huyết";
             replaceFragment(new BGDetailFragment());
-        }else if(fragmentId == MyConstants.BLOOD_BMI_ID)
+        }else if(fragmentId == MyConstants.BMI_ID)
         {
             replaceFragment(new BMIDetailFragment());
+        }else if(fragmentId == MyConstants.DRINK_WATER_ID)
+        {
+            title = "Nhắc nhở uống nước";
+            replaceFragment(new WaterFragment());
         }
 
         setTitleName(title);
@@ -78,7 +84,7 @@ public class DetailsActivity extends AppCompatActivity {
             }else if(fragmentId == MyConstants.BLOOD_GLUCOSE_ID)
             {
                 replaceFragment(new RecordBGFragment());
-            }else if(fragmentId == MyConstants.BLOOD_BMI_ID)
+            }else if(fragmentId == MyConstants.BMI_ID)
             {
                 replaceFragment(new RecordBMIFragment());
             }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog"
+    android:padding="@dimen/_10sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imvWater"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:src="@drawable/bottle"
+        app:riv_corner_radius="999dp"
+        android:scaleType="fitCenter"
+        app:riv_oval="true"
+        app:riv_border_width="@dimen/_1sdp"
+        app:riv_border_color="@color/white"
+        app:riv_mutate_background="true"
+        android:background="@color/green_secondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvLvWater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="300"
+        android:textSize="@dimen/_30ssp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintStart_toEndOf="@id/imvWater"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvTime"/>
+
+    <TextView
+        android:id="@+id/tvUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ml"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintStart_toEndOf="@id/tvLvWater"
+        app:layout_constraintBottom_toBottomOf="@id/tvLvWater"/>
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2023-10-26 23:55:10"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/gray_primary"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintStart_toStartOf="@id/tvLvWater"
+        app:layout_constraintTop_toBottomOf="@id/tvLvWater"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

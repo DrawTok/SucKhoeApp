@@ -4,17 +4,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/custom_dialog">
 
         <TextView
             android:id="@+id/tvValueLevel"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_60sdp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_20ssp"
             android:textAlignment="center"
+            android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/viewColor"
             app:layout_constraintBottom_toTopOf="@id/tvUnit"
@@ -35,12 +37,12 @@
             android:id="@+id/viewColor"
             android:layout_width="@dimen/_6sdp"
             android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:background="@drawable/custom_dialog"
             android:backgroundTint="@color/red_primary"
-            android:layout_marginStart="@dimen/_20sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvUnit"/>
+            app:layout_constraintStart_toEndOf="@id/tvValueLevel"/>
 
         <TextView
             android:id="@+id/tvNameLevel"
@@ -49,7 +51,8 @@
             android:textSize="@dimen/_14ssp"
             android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintStart_toEndOf="@id/viewColor"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvMoreInfo"/>
 
         <TextView
             android:id="@+id/tvMoreInfo"
@@ -57,14 +60,33 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintTop_toBottomOf="@id/tvNameLevel"
+            app:layout_constraintBottom_toTopOf="@id/tvBMI"
             app:layout_constraintStart_toStartOf="@id/tvNameLevel" />
+
+        <TextView
+            android:id="@+id/tvBMI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:visibility="gone"
+            android:backgroundTint="@color/green"
+            android:background="@drawable/bg_text_2"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvMoreInfo"
+            app:layout_constraintStart_toStartOf="@id/tvNameLevel"
+            app:layout_constraintBottom_toTopOf="@id/tvTime"/>
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvBMI"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvNameLevel"/>
 
         <ImageView

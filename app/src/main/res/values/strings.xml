@@ -10,12 +10,12 @@
     <string name="bPressure_stage_2">Tăng huyết áp: Giai đoạn 2</string>
     <string name="bPressure_stage_3">Tăng huyết áp: Giai đoạn 3</string>
 
-    <string name="bPressure_level_low">SYS &lt; 90 hoặc DIA &lt; 60</string>
+    <string name="bPressure_level_low">SYS &lt;90 hoặc DIA &lt;60</string>
     <string name="bPressure_level_normal">SYS 90–119 và DIA 60–79</string>
     <string name="bPressure_level_high">SYS 120–129 hoặc DIA 60–79</string>
     <string name="bPressure_level_stage1">SYS 130–139 hoặc DIA 80–89</string>
     <string name="bPressure_level_stage2">SYS 140–180 hoặc DIA 90–120</string>
-    <string name="bPressure_level_stage3">SYS > 180 và DIA > 120</string>
+    <string name="bPressure_level_stage3">SYS &gt;180 và DIA &gt;120</string>
 
 
     <string name="bGlucose_low"> Thấp </string>
@@ -26,7 +26,25 @@
     <string name="bGlucose_level_low"> &lt;4,0 </string>
     <string name="bGlucose_level_normal">4,0~5,5</string>
     <string name="bGlucose_level_preDiabetes">5,5~7,0</string>
-    <string name="bGlucose_level_diabetes"> >=7,0</string>
+    <string name="bGlucose_level_diabetes"> &#8805;7,0</string>
+
+    <string name="bmi_lowest">Thiếu cân rất trầm trọng</string>
+    <string name="bmi_lower">Thiếu cân nặng</string>
+    <string name="bmi_low">Thiếu cân</string>
+    <string name="bmi_normal">Bình thường</string>
+    <string name="bmi_high">Thừa cân</string>
+    <string name="bmi_stage_1">Béo phì loại I</string>
+    <string name="bmi_stage_2">Béo phì loại II</string>
+    <string name="bmi_stage_3">Béo phì loại III</string>
+
+    <string name="bmi_level_lowest">BMI &lt;16.0</string>
+    <string name="bmi_level_lower">BMI 16.0–16.9</string>
+    <string name="bmi_level_low">BMI 17.0–18.4</string>
+    <string name="bmi_level_normal">BMI 18.5–24.9</string>
+    <string name="bmi_level_high">BMI 25.0–29.9</string>
+    <string name="bmi_level_stage1">BMI 30.0–34.9</string>
+    <string name="bmi_level_stage2">BMI 35–39.9</string>
+    <string name="bmi_level_stage3">BMI &#8805;40.0</string>
 
     <string name="them_ban_ghi">Thêm bản ghi</string>
     <string name="back">Trở lại</string>
@@ -52,4 +70,9 @@
     <string name="xoa_delete">Xóa</string>
     <string name="unit_bp">mmHg</string>
     <string name="bmi">BMI</string>
+    <string name="daily_goals">Mục tiêu hàng ngày:</string>
+    <string name="final_drink">Uống gần đây nhất:</string>
+    <string name="number_drink">Số cốc đã uống:</string>
+    <string name="luong_nuoc_uong">Lượng nước bạn uống</string>
+    <string name="ml">ml</string>
 </resources>

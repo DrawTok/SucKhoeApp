@@ -124,20 +124,4 @@ public class BloodGlucoseViewModel extends ViewModel {
             }
         });
     }
-
-    public void getLatestDataGlucose() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() ->
-        {
-            try {
-                List<BloodGlucose> list = repository.getLatestDataBGlucose();
-                bloodGlucoseListLiveData.postValue(list);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                executorService.shutdown();
-            }
-        });
-    }
-
 }

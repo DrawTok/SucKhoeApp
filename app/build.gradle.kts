@@ -65,5 +65,9 @@ dependencies {
     //wheelPicker
     implementation("io.github.ShawnLin013:number-picker:2.4.13")
 
+    //rulerView
     implementation("com.github.shichunlei:RulerView:1.0.0")
+
+    //roundedImageView
+    implementation("com.makeramen:roundedimageview:2.3.0")
 }

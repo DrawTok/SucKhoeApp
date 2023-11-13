@@ -5,6 +5,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,17 +25,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/nameValueF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tâm thu" />
 
                 <TextView
-                    android:id="@+id/tvLvSystolic"
+                    android:id="@+id/tvLvValueF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_24ssp" />
 
                 <TextView
+                    android:id="@+id/tvUnitValueF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mmhg" />
@@ -51,18 +55,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-
+                    android:id="@+id/nameValueS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tâm trương" />
 
                 <TextView
-                    android:id="@+id/tvLvDiastolic"
+                    android:id="@+id/tvLvValueS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_24ssp" />
 
                 <TextView
+                    android:id="@+id/tvUnitValueS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mmhg" />
@@ -79,17 +84,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/nameValueT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Xung" />
 
                 <TextView
-                    android:id="@+id/tvLvPulse"
+                    android:id="@+id/tvLvValueT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_24ssp" />
 
                 <TextView
+                    android:id="@+id/tvUnitValueT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/bpm" />

@@ -3,6 +3,7 @@ package com.draw.suckhoe.utils;
 import android.content.Context;
 
 import com.draw.suckhoe.R;
+import com.draw.suckhoe.model.BMIModel;
 import com.draw.suckhoe.model.BloodGlucose;
 import com.draw.suckhoe.model.BloodPressure;
 
@@ -64,6 +65,51 @@ public class ViewColorRenderer {
             color = R.color.red_primary;
         }
 
+        return new LevelResult(name, about, color);
+    }
+
+    public LevelResult renderColorView(BMIModel bmiModel, Context context) {
+        int type = bmiModel.getType();
+        String name, about;
+        int color;
+
+        if (type == 1) {
+            name = context.getString(R.string.bmi_lowest);
+            about = context.getString(R.string.bmi_level_lowest);
+            color = R.color.purple;
+        } else if (type == 2) {
+            name = context.getString(R.string.bmi_lower);
+            about = context.getString(R.string.bmi_level_lower);
+            color = R.color.blue_5th;
+        } else if (type == 3) {
+            name = context.getString(R.string.bmi_low);
+            about = context.getString(R.string.bmi_level_low);
+            color = R.color.blue_4th;
+        } else if(type == 4){
+            name = context.getString(R.string.bmi_normal);
+            about = context.getString(R.string.bmi_level_normal);
+            color = R.color.green;
+        }else if(type == 5)
+        {
+            name = context.getString(R.string.bmi_high);
+            about = context.getString(R.string.bmi_level_high);
+            color = R.color.yellow_primary;
+        }else if(type == 6)
+        {
+            name = context.getString(R.string.bmi_stage_1);
+            about = context.getString(R.string.bmi_level_stage1);
+            color = R.color.orange_primary;
+        }else if(type == 7)
+        {
+            name = context.getString(R.string.bmi_stage_2);
+            about = context.getString(R.string.bmi_level_stage2);
+            color = R.color.orange_secondary;
+        }else
+        {
+            name = context.getString(R.string.bmi_stage_3);
+            about = context.getString(R.string.bmi_level_stage3);
+            color = R.color.red_primary;
+        }
         return new LevelResult(name, about, color);
     }
 }

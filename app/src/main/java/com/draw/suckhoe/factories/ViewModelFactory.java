@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.draw.suckhoe.view.viewModels.BMIViewModel;
 import com.draw.suckhoe.view.viewModels.BloodGlucoseViewModel;
 import com.draw.suckhoe.view.viewModels.BloodPressureViewModel;
 import com.draw.suckhoe.view.viewModels.ReminderViewModel;
+import com.draw.suckhoe.view.viewModels.WaterViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     private final Application application;
@@ -26,6 +28,10 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ReminderViewModel(application);
         }else if(modelClass.isAssignableFrom(BloodGlucoseViewModel.class))
             return (T) new BloodGlucoseViewModel(application);
+        else if(modelClass.isAssignableFrom(BMIViewModel.class))
+            return (T) new BMIViewModel(application);
+        else if(modelClass.isAssignableFrom(WaterViewModel.class))
+            return (T) new WaterViewModel(application);
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

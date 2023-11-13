@@ -16,30 +16,30 @@ import com.draw.suckhoe.R;
 import com.draw.suckhoe.database.HealthDB;
 import com.draw.suckhoe.databinding.BpSuccessFragmentBinding;
 import com.draw.suckhoe.factories.ViewModelFactory;
-import com.draw.suckhoe.model.BloodPressure;
+import com.draw.suckhoe.model.BMIModel;
 import com.draw.suckhoe.utils.LevelResult;
 import com.draw.suckhoe.utils.ViewColorRenderer;
-import com.draw.suckhoe.view.viewModels.BloodPressureViewModel;
+import com.draw.suckhoe.view.viewModels.BMIViewModel;
 
-public class BPSuccessFragment extends Fragment {
+public class BMISuccessFragment extends Fragment {
 
     BpSuccessFragmentBinding binding;
-    BloodPressure bloodPressure;
 
-    private BloodPressureViewModel viewModel;
+    private BMIViewModel viewModel;
+    private BMIModel bmiModel;
     HealthDB healthDB;
-
     View clock, tvDlt;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         binding = BpSuccessFragmentBinding.inflate(inflater, container, false);
 
         healthDB = HealthDB.getInstance(requireContext());
 
         ViewModelFactory factory = new ViewModelFactory(requireActivity().getApplication());
-        viewModel = new ViewModelProvider(this, factory).get(BloodPressureViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(BMIViewModel.class);
 
         if (getActivity() != null) {
             clock = getActivity().findViewById(R.id.timer);
@@ -57,7 +57,7 @@ public class BPSuccessFragment extends Fragment {
             fragmentManager.popBackStack();
             tvDlt.setVisibility(View.GONE);
             clock.setVisibility(View.VISIBLE);
-            viewModel.deleteBPressure(bloodPressure);
+            viewModel.deleteDataBMI(bmiModel);
         });
 
         return binding.getRoot();
@@ -65,28 +65,36 @@ public class BPSuccessFragment extends Fragment {
 
     private void getDataInBundle() {
         Bundle bundle = getArguments();
-        if(bundle != null) {
-            bloodPressure = bundle.getParcelable("bPressure_info");
-            if(bloodPressure != null)
-            {
-                binding.tvLvValueF.setText(String.valueOf(bloodPressure.getSystolic()));
-                binding.tvLvValueS.setText(String.valueOf(bloodPressure.getDiastolic()));
-                binding.tvLvValueT.setText(String.valueOf(bloodPressure.getPulse()));
-                binding.tvTime.setText(bloodPressure.getTime());
-                renderColorView(bloodPressure);
+        if (bundle != null) {
+            bmiModel = bundle.getParcelable("bmi_info");
+            if (bmiModel != null) {
+                float bmi = bmiModel.getBmi();
+
+                binding.nameValueF.setText("Cân nặng");
+                binding.tvLvValueF.setText(String.valueOf(bmiModel.getWeight()));
+                binding.tvUnitValueF.setText("Kg");
+
+                binding.nameValueS.setText("Chiều cao");
+                binding.tvLvValueS.setText(String.valueOf(bmiModel.getHeight()));
+                binding.tvUnitValueS.setText("Cm");
+
+                binding.nameValueT.setText("BMI");
+                binding.tvLvValueT.setText(String.valueOf(bmi));
+                binding.tvUnitValueT.setText("");
+
+                binding.tvTime.setText(bmiModel.getTime());
+                renderColorView(bmiModel);
             }
 
-            if(bundle.getInt("IS_NEW_DATA") == 1)
+            if (bundle.getInt("IS_NEW_DATA") == 1)
                 requireActivity().findViewById(R.id.tvFinish).setVisibility(View.VISIBLE);
             else
                 tvDlt.setVisibility(View.VISIBLE);
         }
-
     }
-
-    private void renderColorView(BloodPressure bloodPressure)
+    private void renderColorView(BMIModel bmiModel)
     {
-        LevelResult result = new ViewColorRenderer().renderColorView(bloodPressure, requireContext());
+        LevelResult result = new ViewColorRenderer().renderColorView(bmiModel, requireContext());
 
         binding.tvNameLevel.setText(result.getNameRes());
         binding.tvAboutLevel.setText(result.getLevelRes());

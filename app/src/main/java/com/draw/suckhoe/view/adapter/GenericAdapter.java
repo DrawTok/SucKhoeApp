@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.draw.suckhoe.R;
 import com.draw.suckhoe.databinding.ItemHistoryBinding;
+import com.draw.suckhoe.model.BMIModel;
 import com.draw.suckhoe.model.BloodGlucose;
 import com.draw.suckhoe.model.BloodPressure;
 import com.draw.suckhoe.myInterface.OnClickItemListener;
@@ -67,6 +68,21 @@ public class GenericAdapter<T> extends RecyclerView.Adapter<GenericAdapter.Gener
             holder.binding.tvTime.setText(bloodGlucose.getTime());
             LevelResult levelResult = new ViewColorRenderer().renderColorView(bloodGlucose, context);
             holder.binding.tvNameLevel.setText(levelResult.getNameRes());
+            holder.binding.viewColor.setBackgroundTintList(
+                    ColorStateList.valueOf(ContextCompat.getColor(context, levelResult.getType())));
+        }else if(item instanceof BMIModel)
+        {
+            BMIModel bmiModel = (BMIModel) item;
+            holder.binding.tvValueLevel.setText(String.valueOf(bmiModel.getWeight()));
+            holder.binding.tvUnit.setText("Kg");
+            holder.binding.tvTime.setText(bmiModel.getTime());
+            holder.binding.tvMoreInfo.setText(String.format("Height: %scm", bmiModel.getHeight()));
+            LevelResult levelResult = new ViewColorRenderer().renderColorView(bmiModel, context);
+            holder.binding.tvBMI.setVisibility(View.VISIBLE);
+            holder.binding.tvBMI.setText(String.format("BMI: %s", bmiModel.getBmi()));
+            holder.binding.tvNameLevel.setText(levelResult.getNameRes());
+            holder.binding.tvBMI.setBackgroundTintList(
+                    ColorStateList.valueOf(ContextCompat.getColor(context, levelResult.getType())));
             holder.binding.viewColor.setBackgroundTintList(
                     ColorStateList.valueOf(ContextCompat.getColor(context, levelResult.getType())));
         }

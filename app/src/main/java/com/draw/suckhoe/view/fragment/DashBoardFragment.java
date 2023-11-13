@@ -33,7 +33,7 @@ public class DashBoardFragment extends Fragment {
                 startDetailsActivityWithId(MyConstants.BLOOD_GLUCOSE_ID));
 
         binding.cardViewBMI.setOnClickListener(v ->
-                startDetailsActivityWithId(MyConstants.BLOOD_BMI_ID));
+                startDetailsActivityWithId(MyConstants.BMI_ID));
 
         binding.cardViewDrinkWater.setOnClickListener(v ->
                 startDetailsActivityWithId(MyConstants.DRINK_WATER_ID));

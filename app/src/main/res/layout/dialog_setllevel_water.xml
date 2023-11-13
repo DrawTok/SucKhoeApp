@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_20ssp"
+    android:layout_marginEnd="@dimen/_20ssp"
+    android:padding="@dimen/_20sdp"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/custom_dialog"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:id="@+id/edtLevelWater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green_secondary"
+        android:background="@drawable/custom_wheel"
+        android:padding="@dimen/_10sdp"
+        android:text="2000"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnSkip"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSkip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20ssp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/edtLevelWater"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAcp"
+        android:text="Hủy"
+        android:textColor="@color/green"
+        android:background="@drawable/custom_btn"
+        android:textSize="@dimen/_13ssp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAcp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_marginStart="@dimen/_20ssp"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_btn"
+        android:backgroundTint="@color/green"
+        app:layout_constraintStart_toEndOf="@id/btnSkip"
+        app:layout_constraintTop_toTopOf="@id/btnSkip"
+        app:layout_constraintBottom_toBottomOf="@id/btnSkip"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
