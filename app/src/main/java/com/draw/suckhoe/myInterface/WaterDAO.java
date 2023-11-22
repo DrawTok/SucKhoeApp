@@ -20,6 +20,6 @@ public interface WaterDAO {
 
     @Query("SELECT * FROM water ORDER BY id DESC LIMIT 1")
     Water getLatestWater();
-    @Query("SELECT * FROM water")
+    @Query("SELECT * FROM water WHERE time BETWEEN :")
     List<Water> getAllRecordWater();
 }

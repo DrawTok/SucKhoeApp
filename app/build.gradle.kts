@@ -70,4 +70,7 @@ dependencies {
 
     //roundedImageView
     implementation("com.makeramen:roundedimageview:2.3.0")
+
+    //CircularProgressBar
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 }
