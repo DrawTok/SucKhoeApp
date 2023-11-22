@@ -29,8 +29,8 @@ public class WaterRepository {
         return waterDAO.getLatestWater();
     }
 
-    public List<Water> getAllDataBGlucose()
+    public List<Water> getAllDataBGlucose(String startDate, String endDate)
     {
-        return waterDAO.getAllRecordWater();
+        return waterDAO.getAllRecordWater(startDate, endDate);
     }
 }

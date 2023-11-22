@@ -15,4 +15,6 @@ public class MyConstants {
     public static final String PREF_CURRENT_PROGRESS = "currentProgress";
     public static final String PREF_NUM_OF_CUPS = "numOfCups";
     public static final String PREF_DEF_WATER = "defWater";
+
+    public static final String GOAL_DRINK_WATER = "goalDrink";
 }

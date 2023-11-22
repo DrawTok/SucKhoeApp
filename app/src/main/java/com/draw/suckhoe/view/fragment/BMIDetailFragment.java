@@ -280,31 +280,43 @@ public class BMIDetailFragment extends Fragment implements OnClickItemListener {
 
     private float findMax(List<BMIModel> bmiModels)
     {
-        float maxBMI = Float.MIN_VALUE;
-        for (BMIModel bmiModel : bmiModels)
+        if(!bmiModels.isEmpty())
         {
-            maxBMI = Math.max(bmiModel.getBmi(), maxBMI);
+            float maxBMI = Float.MIN_VALUE;
+            for (BMIModel bmiModel : bmiModels)
+            {
+                maxBMI = Math.max(bmiModel.getBmi(), maxBMI);
+            }
+            return maxBMI;
         }
-        return maxBMI;
+        return 0;
     }
 
     private float findMin(List<BMIModel> bmiModels)
     {
-        float minBMI = Float.MAX_VALUE;
-        for (BMIModel bmiModel : bmiModels)
+        if(!bmiModels.isEmpty())
         {
-            minBMI = Math.min(bmiModel.getBmi(), minBMI);
+            float minBMI = Float.MAX_VALUE;
+            for (BMIModel bmiModel : bmiModels)
+            {
+                minBMI = Math.min(bmiModel.getBmi(), minBMI);
+            }
+            return minBMI;
         }
-        return minBMI;
+        return 0;
     }
 
     private float calcAvgBMI(List<BMIModel> bmiModels)
     {
-        float totalBMI = 0;
-        for (BMIModel bmiModel : bmiModels)
+        if(!bmiModels.isEmpty())
         {
-            totalBMI += bmiModel.getBmi();
+            float totalBMI = 0;
+            for (BMIModel bmiModel : bmiModels)
+            {
+                totalBMI += bmiModel.getBmi();
+            }
+            return Math.round((totalBMI / bmiModels.size()) * 10.0f) / 10.0f;
         }
-        return Math.round((totalBMI / bmiModels.size()) * 10.0f) / 10.0f;
+        return 0;
     }
 }

@@ -47,7 +47,6 @@
                     android:id="@+id/tvGoals"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2000ml"
                     app:layout_constraintEnd_toStartOf="@id/imvEdit"
                     app:layout_constraintTop_toTopOf="parent" />
 

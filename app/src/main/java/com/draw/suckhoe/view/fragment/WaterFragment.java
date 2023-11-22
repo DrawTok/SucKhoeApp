@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,7 @@ import com.draw.suckhoe.databinding.WaterFragmentBinding;
 import com.draw.suckhoe.factories.ViewModelFactory;
 import com.draw.suckhoe.model.Water;
 import com.draw.suckhoe.utils.MyConstants;
+import com.draw.suckhoe.view.activity.DetailsActivity;
 import com.draw.suckhoe.view.viewModels.WaterViewModel;
 import com.google.android.material.button.MaterialButton;
 
@@ -41,8 +41,9 @@ public class WaterFragment extends Fragment {
     private static final String PREF_ML = "ml";
     private WaterFragmentBinding binding;
     private Vibrator vibrator;
-    private int preValue;
+    private int preValue = 0;
     private int numOfCups = 0;
+    private int goalDrink = 0;
     private Water water;
     private WaterViewModel waterViewModel;
     private SharedPreferences sharedPref;
@@ -52,22 +53,35 @@ public class WaterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = WaterFragmentBinding.inflate(inflater, container, false);
+
         vibrator = (Vibrator) requireActivity().getSystemService(Context.VIBRATOR_SERVICE);
+
         sharedPref = requireContext().getSharedPreferences(MyConstants.PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        setUpUI();
         setUpViewModel();
+        setUpUI();
         setUpAction();
         return binding.getRoot();
     }
 
     private void setUpUI() {
-        binding.waveWater.setProgress(sharedPref.getInt(MyConstants.PREF_CURRENT_PROGRESS, 0));
+
+        int currentProgress = sharedPref.getInt(MyConstants.PREF_CURRENT_PROGRESS, 0);
         numOfCups = sharedPref.getInt(MyConstants.PREF_NUM_OF_CUPS, 0);
         preValue = sharedPref.getInt(MyConstants.PREF_DEF_WATER, 200);
-        binding.valueNumOfCups.setText(String.format("%s Cốc", numOfCups));
+        goalDrink = sharedPref.getInt(MyConstants.GOAL_DRINK_WATER, 2000);
+
+        binding.waveWater.setProgress(currentProgress);
+        binding.waveWater.setMaxProgress(goalDrink);
         binding.waveWater.setDefProgress(preValue);
+
+        water = waterViewModel.getLatestWater();
+        binding.valueRecentWater.setText(String.format("%sml", water != null ? water.getMlWater() : "--"));
+
+        binding.valueNumOfCups.setText(String.format("%s Cốc", numOfCups));
+        binding.tvGoals.setText(String.format("%sml", goalDrink));
+
         if (getActivity() != null) {
             getActivity().findViewById(R.id.tvAddNewRecord).setVisibility(View.GONE);
         }
@@ -83,9 +97,17 @@ public class WaterFragment extends Fragment {
         binding.btnIncrease.setOnClickListener(v -> onIncreaseButtonClick());
         binding.btnDecrease.setOnClickListener(v -> onDecreaseButtonClick());
         binding.btnSetUp.setOnClickListener(v -> changeAmountOfWater());
+
+        binding.tvHistory.setOnClickListener(v->
+        {
+            DetailsActivity activity = (DetailsActivity) getActivity();
+            if(activity != null)
+                activity.replaceFragment(new WaterDetailFragment());
+        });
     }
 
     private void onIncreaseButtonClick() {
+        binding.waveWater.setDefProgress(sharedPref.getInt(MyConstants.PREF_DEF_WATER, 200));
         binding.waveWater.increaseProgress();
         int isGoals = 0;
         if (binding.waveWater.getProgress() >= binding.waveWater.getMaxProgress()) {
@@ -99,23 +121,20 @@ public class WaterFragment extends Fragment {
     }
 
     private void onDecreaseButtonClick() {
-        Water latestWater = waterViewModel.getLatestWater();
-        if (latestWater != null) {
-            water = latestWater;
+        water = waterViewModel.getLatestWater();
+        if (water != null) {
             binding.waveWater.setDefProgress(water.getMlWater());
+            waterViewModel.deleteDataWater(water);
             binding.waveWater.decreaseProgress();
             numOfCups -= 1;
 
             if (numOfCups <= 0) {
-                waterViewModel.deleteDataWater(water);
                 numOfCups = 0;
-                binding.waveWater.setDefProgress(preValue);
                 binding.valueRecentWater.setText(String.format("--%s", requireContext().getString(R.string.ml)));
-            } else {
-                waterViewModel.deleteDataWater(water);
-                binding.valueRecentWater.setText(String.format("%sml", binding.waveWater.getDefProgress()));
+            }else
+            {
+                binding.valueRecentWater.setText(String.format("%sml", waterViewModel.getLatestWater().getMlWater()));
             }
-
             binding.valueNumOfCups.setText(String.format("%s Cốc", numOfCups));
         }
     }
@@ -137,9 +156,9 @@ public class WaterFragment extends Fragment {
     }
 
     private void onAcceptMaxLevelWaterClick(EditText edtLevelWater) {
-        int level = Integer.parseInt(edtLevelWater.getText().toString());
-        binding.tvGoals.setText(String.format("%sml", level));
-        binding.waveWater.setMaxProgress(level);
+        goalDrink = Integer.parseInt(edtLevelWater.getText().toString());
+        binding.tvGoals.setText(String.format("%sml", goalDrink));
+        binding.waveWater.setMaxProgress(goalDrink);
     }
 
     private void changeAmountOfWater() {
@@ -205,12 +224,13 @@ public class WaterFragment extends Fragment {
     private void saveData() {
         editor.putInt(MyConstants.PREF_CURRENT_PROGRESS, binding.waveWater.getProgress());
         editor.putInt(MyConstants.PREF_NUM_OF_CUPS, numOfCups);
+        editor.putInt(MyConstants.GOAL_DRINK_WATER, goalDrink);
         editor.apply();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onStop() {
+        super.onStop();
         saveData();
     }
 }
