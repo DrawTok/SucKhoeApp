@@ -87,13 +87,13 @@ public class WaterViewModel extends ViewModel {
     }
 
 
-    public void getListDataWater()
+    public void getListDataWater(String startDate, String endDate)
     {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(()->
         {
             try{
-                List<Water> list = repository.getAllDataBGlucose();
+                List<Water> list = repository.getAllDataBGlucose(startDate, endDate);
                 listLiveData.postValue(list);
             }catch (Exception e)
             {

@@ -1,6 +1,7 @@
 package com.draw.suckhoe.view.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.draw.suckhoe.R;
 import com.draw.suckhoe.databinding.ActivityMainBinding;
+import com.draw.suckhoe.utils.MyConstants;
 import com.draw.suckhoe.view.fragment.DashBoardFragment;
 import com.draw.suckhoe.view.fragment.DetailFragment;
 import com.draw.suckhoe.view.fragment.HealthMonitorFragment;
@@ -39,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
             if(itemId == R.id.homePage)
                 replaceFragment(new DashBoardFragment());
             else if(itemId == R.id.monitor)
-                replaceFragment(new HealthMonitorFragment());
+            {
+                Intent intent = new Intent(this, DetailsActivity.class);
+                intent.putExtra("idFragment", MyConstants.BLOOD_GLUCOSE_ID);
+                intent.putExtra("IS_NAV_MENU", MyConstants.IS_NAV_MENU);
+                startActivity(intent);
+            }
             else if(itemId == R.id.details)
                 replaceFragment(new DetailFragment());
             else if(itemId == R.id.setting)
