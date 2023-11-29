@@ -20,12 +20,12 @@
     <style name="Custom.Widget.SwitchCompat" parent="Widget.AppCompat.CompoundButton.Switch"/>
 
     <style name="Theme.SứcKhỏe" parent="Base.Theme.SứcKhỏe" />
-    
+
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
     </style>
-    
+
     <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/white</item>

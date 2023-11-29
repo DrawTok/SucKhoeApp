@@ -24,6 +24,7 @@ import com.draw.suckhoe.view.fragment.RecordBGFragment;
 import com.draw.suckhoe.view.fragment.RecordBMIFragment;
 import com.draw.suckhoe.view.fragment.RecordBPFragment;
 import com.draw.suckhoe.view.fragment.ReminderFragment;
+import com.draw.suckhoe.view.fragment.StepFragment;
 import com.draw.suckhoe.view.fragment.WaterFragment;
 import com.draw.suckhoe.view.viewModels.DetailsViewModel;
 
@@ -40,10 +41,18 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
+
         int fragmentId = intent.getIntExtra("idFragment", -1);
+        int isNavMenu = intent.getIntExtra("IS_NAV_MENU", -1);
         setStatusBarColor();
         viewModel = new DetailsViewModel();
         binding.setDetailsViewModel(viewModel);
+
+        if(isNavMenu == 1)
+        {
+            binding.btnBack.setVisibility(View.GONE);
+        }
+
         if(fragmentId == MyConstants.BLOOD_PRESSURE_ID)
         {
             title = "Huyết áp";
@@ -54,11 +63,16 @@ public class DetailsActivity extends AppCompatActivity {
             replaceFragment(new BGDetailFragment());
         }else if(fragmentId == MyConstants.BMI_ID)
         {
+            title = "Cân nặng & chỉ số BMI";
             replaceFragment(new BMIDetailFragment());
-        }else if(fragmentId == MyConstants.DRINK_WATER_ID)
+        }else if(fragmentId == MyConstants.DRINK_WATER_ID && isNavMenu != 1)
         {
             title = "Nhắc nhở uống nước";
             replaceFragment(new WaterFragment());
+        }else if(fragmentId == MyConstants.COUNT_STEP_ID && isNavMenu != 1)
+        {
+            title = "Bộ đếm bước";
+            replaceFragment(new StepFragment());
         }
 
         setTitleName(title);
@@ -69,11 +83,11 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-       viewModel.getIsVisibility().observe(this, isVisibility ->
-               binding.tvAddNewRecord.setVisibility(isVisibility ? View.VISIBLE : View.GONE));
+        viewModel.getIsVisibility().observe(this, isVisibility ->
+                binding.tvAddNewRecord.setVisibility(isVisibility ? View.VISIBLE : View.GONE));
 
 
-       viewModel.getLiveDataTitle().observe(this, s -> binding.tvActivityTitle.setText(s));
+        viewModel.getLiveDataTitle().observe(this, s -> binding.tvActivityTitle.setText(s));
 
         binding.tvAddNewRecord.setOnClickListener(v->
         {

@@ -32,6 +32,7 @@ import com.draw.suckhoe.view.viewModels.WaterViewModel;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -66,6 +67,13 @@ public class WaterFragment extends Fragment {
     }
 
     private void setUpUI() {
+
+        if(isNewDate())
+        {
+            editor.clear();
+            editor.putInt(MyConstants.PREV_DAY, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+            editor.commit();
+        }
 
         int currentProgress = sharedPref.getInt(MyConstants.PREF_CURRENT_PROGRESS, 0);
         numOfCups = sharedPref.getInt(MyConstants.PREF_NUM_OF_CUPS, 0);
@@ -226,6 +234,17 @@ public class WaterFragment extends Fragment {
         editor.putInt(MyConstants.PREF_NUM_OF_CUPS, numOfCups);
         editor.putInt(MyConstants.GOAL_DRINK_WATER, goalDrink);
         editor.apply();
+    }
+
+    private boolean isNewDate()
+    {
+        int prevDay = sharedPref.getInt(MyConstants.PREV_DAY, -1);
+        int nowDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        if(prevDay == -1)
+        {
+            return true;
+        }
+        return nowDay != prevDay;
     }
 
     @Override
