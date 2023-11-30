@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/custom_wheel"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="@color/green">
+        <TextView
+            android:id="@+id/tvNameData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Gần đây"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/gray_secondary"/>
+
+        <TextView
+            android:id="@+id/tvValueData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNameData"
+            android:text="4,4 mmol/L"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

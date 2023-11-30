@@ -32,17 +32,20 @@ android {
 
     buildFeatures{
         dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
 
     //nếu (jdk_version == 1,8)
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.navigation:navigation-fragment:2.5.3")
+    implementation("androidx.navigation:navigation-ui:2.5.3")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -55,7 +58,7 @@ dependencies {
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
 
     //room
-    val roomVersion = "2.5.2"
+    val roomVersion = "2.6.0"
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
 
@@ -65,6 +68,12 @@ dependencies {
     //wheelPicker
     implementation("io.github.ShawnLin013:number-picker:2.4.13")
 
-    //color seekBar
-    implementation("com.github.rtugeek:colorseekbar:2.0.3")
+    //rulerView
+    implementation("com.github.shichunlei:RulerView:1.0.0")
+
+    //roundedImageView
+    implementation("com.makeramen:roundedimageview:2.3.0")
+
+    //CircularProgressBar
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 }

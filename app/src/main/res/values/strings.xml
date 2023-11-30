@@ -6,11 +6,116 @@
     <string name="bPressure_low">Huyết áp thấp</string>
     <string name="bPressure_high">Huyết áp cao</string>
     <string name="bPressure_stage">Tăng huyết áp</string>
+    <string name="bPressure_stage_1">Tăng huyết áp: Giai đoạn 1</string>
+    <string name="bPressure_stage_2">Tăng huyết áp: Giai đoạn 2</string>
+    <string name="bPressure_stage_3">Tăng huyết áp: Giai đoạn 3</string>
 
-    <string name="bPressure_level_low">SYS &lt; 90 hoặc DIA &lt; 60</string>
-    <string name="bPressure_level_normal">SYS 90-119 và DIA 60-79</string>
-    <string name="bPressure_level_high">SYS 120-129 hoặc DIA 60-79</string>
-    <string name="bPressure_level_stage1">SYS 130-139 hoặc DIA 80-89</string>
-    <string name="bPressure_level_stage2">SYS 140-180 hoặc DIA 90-120</string>
-    <string name="bPressure_level_stage3">SYS > 180 và DIA > 120</string>
+    <string name="bPressure_level_low">SYS &lt;90 hoặc DIA &lt;60</string>
+    <string name="bPressure_level_normal">SYS 90–119 và DIA 60–79</string>
+    <string name="bPressure_level_high">SYS 120–129 hoặc DIA 60–79</string>
+    <string name="bPressure_level_stage1">SYS 130–139 hoặc DIA 80–89</string>
+    <string name="bPressure_level_stage2">SYS 140–180 hoặc DIA 90–120</string>
+    <string name="bPressure_level_stage3">SYS &gt;180 và DIA &gt;120</string>
+
+
+    <string name="bGlucose_low"> Thấp </string>
+    <string name="bGlucose_normal">Bình thường</string>
+    <string name="bGlucose_preDiabetes">Tiền tiểu đường</string>
+    <string name="bGlucose_diabetes">Bệnh tiểu đường</string>
+
+    <string name="bGlucose_level_low"> &lt;4,0 </string>
+    <string name="bGlucose_level_normal">4,0~5,5</string>
+    <string name="bGlucose_level_preDiabetes">5,5~7,0</string>
+    <string name="bGlucose_level_diabetes"> &#8805;7,0</string>
+
+    <string name="bmi_lowest">Thiếu cân rất trầm trọng</string>
+    <string name="bmi_lower">Thiếu cân nặng</string>
+    <string name="bmi_low">Thiếu cân</string>
+    <string name="bmi_normal">Bình thường</string>
+    <string name="bmi_high">Thừa cân</string>
+    <string name="bmi_stage_1">Béo phì loại I</string>
+    <string name="bmi_stage_2">Béo phì loại II</string>
+    <string name="bmi_stage_3">Béo phì loại III</string>
+
+    <string name="bmi_level_lowest">BMI &lt;16.0</string>
+    <string name="bmi_level_lower">BMI 16.0–16.9</string>
+    <string name="bmi_level_low">BMI 17.0–18.4</string>
+    <string name="bmi_level_normal">BMI 18.5–24.9</string>
+    <string name="bmi_level_high">BMI 25.0–29.9</string>
+    <string name="bmi_level_stage1">BMI 30.0–34.9</string>
+    <string name="bmi_level_stage2">BMI 35–39.9</string>
+    <string name="bmi_level_stage3">BMI &#8805;40.0</string>
+
+    <string name="them_ban_ghi">Thêm bản ghi</string>
+    <string name="back">Trở lại</string>
+    <string name="hen_gio">Hẹn giờ</string>
+    <string name="gan_day">Gần đây</string>
+    <string name="gio">Giờ</string>
+    <string name="lap_lai">Lặp lại</string>
+    <string name="thu_3">TUS</string>
+    <string name="thu_2">MON</string>
+    <string name="thu_4">WED</string>
+    <string name="thu_5">THU</string>
+    <string name="thu_6">FRI</string>
+    <string name="thu_7">SAT</string>
+    <string name="chu_nhat">SUN</string>
+    <string name="them_moi">Thêm mới</string>
+    <string name="them_loi_nhac">Thêm lời nhắc</string>
+    <string name="xoa">Xóa</string>
+    <string name="unit_bg">mmol/L</string>
+    <string name="new_add_error">Thêm mới không thành công! Vui lòng đóng ứng dụng và thử lại...</string>
+    <string name="bpm">BPM</string>
+    <string name="mmhg">mmHg</string>
+    <string name="xong">Xong</string>
+    <string name="xoa_delete">Xóa</string>
+    <string name="unit_bp">mmHg</string>
+    <string name="bmi">BMI</string>
+    <string name="daily_goals">Mục tiêu hàng ngày:</string>
+    <string name="final_drink">Uống gần đây nhất:</string>
+    <string name="number_drink">Số cốc đã uống:</string>
+    <string name="luong_nuoc_uong">Lượng nước bạn uống</string>
+    <string name="ml">ml</string>
+    <string name="title_activity_more_info">MoreInfoActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
 </resources>
