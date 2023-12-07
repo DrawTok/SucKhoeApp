@@ -1,0 +1,4 @@
+1; 'Huyết áp',
+2; 'Đường huyết',
+3; 'Trọng lượng cơ thể',
+4; 'Chế độ ăn uống lành mạnh';

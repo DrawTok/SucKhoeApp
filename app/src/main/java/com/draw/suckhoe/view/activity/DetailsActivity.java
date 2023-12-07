@@ -1,11 +1,15 @@
 package com.draw.suckhoe.view.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,9 +52,13 @@ public class DetailsActivity extends AppCompatActivity {
         viewModel = new DetailsViewModel();
         binding.setDetailsViewModel(viewModel);
 
+        binding.imvSwap.setOnClickListener(v->
+                showPopUp(binding.constraintDetailBar));
+
         if(isNavMenu == 1)
         {
             binding.btnBack.setVisibility(View.GONE);
+            binding.imvSwap.setVisibility(View.VISIBLE);
         }
 
         if(fragmentId == MyConstants.BLOOD_PRESSURE_ID)
@@ -141,6 +149,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void replaceFragment(Fragment fragment) {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_detail);
+        if(currentFragment != null && currentFragment.getClass().equals(fragment.getClass()))
+        {
+            return;
+        }
         FragmentTransaction transaction =getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_detail, fragment).addToBackStack(null).commit();
     }
@@ -155,6 +168,7 @@ public class DetailsActivity extends AppCompatActivity {
             binding.tvFinish.setVisibility(View.GONE);
         if(binding.tvDelete.getVisibility() != View.GONE)
             binding.tvDelete.setVisibility(View.GONE);
+
         if(backStack == 2)
         {
             fragmentManager.popBackStack();
@@ -170,5 +184,33 @@ public class DetailsActivity extends AppCompatActivity {
     public void setTitleName(String name)
     {
         viewModel.setTitle(name);
+    }
+
+    private void showPopUp(View view)
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_swap_view);
+        Window window = dialog.getWindow();
+        if(window != null)
+        {
+            window.setDimAmount(0);
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.gravity = Gravity.TOP | Gravity.START;
+            params.x = (int) (view.getX() + 20);
+            params.y = (int) (view.getY() + view.getHeight() - 10);
+        }
+        if(dialog.getWindow() != null)
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView tvBP, tvBG, tvBMI;
+        tvBG = dialog.findViewById(R.id.tvBG);
+        tvBP = dialog.findViewById(R.id.tvBP);
+        tvBMI = dialog.findViewById(R.id.tvBMI);
+
+        tvBG.setOnClickListener(v-> replaceFragment(new BGDetailFragment()));
+        tvBP.setOnClickListener(v-> replaceFragment(new BPDetailFragment()));
+        tvBMI.setOnClickListener(v-> replaceFragment(new BMIDetailFragment()));
+
+        dialog.show();
     }
 }

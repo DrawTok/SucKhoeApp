@@ -24,11 +24,6 @@
         android:theme="@style/Theme.SứcKhỏe"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.MoreInfoActivity"
-            android:exported="false"
-            android:label="@string/title_activity_more_info"
-            android:theme="@style/Theme.SứcKhỏe" />
-        <activity
             android:name=".view.activity.DetailsActivity"
             android:exported="false" />
         <activity

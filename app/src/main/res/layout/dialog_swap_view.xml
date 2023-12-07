@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="wrap_content"
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/custom_dialog">
+
+            <TextView
+                android:id="@+id/tvBP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/huyet_ap"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+
+            <TextView
+                android:id="@+id/tvBG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/duong_huyet"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+
+            <TextView
+                android:id="@+id/tvBMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cannang_bmi"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
