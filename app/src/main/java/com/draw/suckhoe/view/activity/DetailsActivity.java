@@ -24,11 +24,13 @@ import com.draw.suckhoe.utils.MyConstants;
 import com.draw.suckhoe.view.fragment.BGDetailFragment;
 import com.draw.suckhoe.view.fragment.BMIDetailFragment;
 import com.draw.suckhoe.view.fragment.BPDetailFragment;
+import com.draw.suckhoe.view.fragment.DetailFragment;
 import com.draw.suckhoe.view.fragment.RecordBGFragment;
 import com.draw.suckhoe.view.fragment.RecordBMIFragment;
 import com.draw.suckhoe.view.fragment.RecordBPFragment;
 import com.draw.suckhoe.view.fragment.ReminderFragment;
 import com.draw.suckhoe.view.fragment.StepFragment;
+import com.draw.suckhoe.view.fragment.TitlesFragment;
 import com.draw.suckhoe.view.fragment.WaterFragment;
 import com.draw.suckhoe.view.viewModels.DetailsViewModel;
 
@@ -69,10 +71,31 @@ public class DetailsActivity extends AppCompatActivity {
         {
             title = "Đường huyết";
             replaceFragment(new BGDetailFragment());
-        }else if(fragmentId == MyConstants.BMI_ID)
-        {
+        }else if(fragmentId == MyConstants.BMI_ID) {
             title = "Cân nặng & chỉ số BMI";
             replaceFragment(new BMIDetailFragment());
+        }else if(fragmentId == MyConstants.DETAIL_INFO_DATA) {
+            int typeId = intent.getIntExtra("DETAIL_DATA_ID", -1);
+            Bundle bundle = new Bundle();
+            TitlesFragment titlesFragment = new TitlesFragment();
+            if(typeId == MyConstants.DETAIL_INFO_BP) {
+                title = "Huyết áp";
+                bundle.putInt("TYPE_ID", 1);
+            }
+            else if(typeId == MyConstants.DETAIL_INFO_BG){
+                title = "Đường huyết";
+                bundle.putInt("TYPE_ID", 2);
+            }else if(typeId == MyConstants.DETAIL_INFO_WEIGHT)
+            {
+                title = "Trọng lượng cơ thể";
+                bundle.putInt("TYPE_ID", 3);
+            }else if(typeId == MyConstants.DETAIL_INFO_DIET)
+            {
+                title = "Chế độ ăn uống lành mạnh";
+                bundle.putInt("TYPE_ID", 4);
+            }
+            titlesFragment.setArguments(bundle);
+            replaceFragment(titlesFragment);
         }else if(fragmentId == MyConstants.DRINK_WATER_ID && isNavMenu != 1)
         {
             title = "Nhắc nhở uống nước";

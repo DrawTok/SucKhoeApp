@@ -76,4 +76,9 @@ dependencies {
 
     //CircularProgressBar
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+
 }

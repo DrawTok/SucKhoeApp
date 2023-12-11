@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
         if(currentFragment != null && currentFragment.getClass().equals(fragment.getClass()))
         {
